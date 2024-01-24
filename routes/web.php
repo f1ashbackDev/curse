@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-
-Route::get('/catalogy', function (){
-    return view('catalogy');
-});
+//Route::get('/catalogy', function (){
+//    return view('catalogy');
+//});
+Route::post('/register', [\App\Http\Controllers\UserController::class, 'register']);

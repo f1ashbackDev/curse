@@ -182,7 +182,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" class="d-flex flex-column align-items-center">
+                    <form action="/register" method="post" class="d-flex flex-column align-items-center">
+                        @csrf
                         <label class="d-flex flex-column border-bottom mt-2">
                             Фамилия
                             <input type="text" pattern="[A-Za-zА-Яа-яЁё]"/>
