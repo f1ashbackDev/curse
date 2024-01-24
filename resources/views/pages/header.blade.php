@@ -29,13 +29,13 @@
                         <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
                     </form>
-                    @auth()
+                    @if(\Illuminate\Support\Facades\Auth::guard('user')->check())
                     <div class="navbar-nav">
                         <a class="nav-link" aria-current="page" href="index.html">Главная</a>
                         <a class="nav-link" href="#">Каталог</a>
                         <a class="nav-link">Профиль</a>
                     </div>
-                    @endauth
+                    @else
                     <div class="navbar-nav">
                         <a class="nav-link" aria-current="page" href="index.html">Главная</a>
                         <a class="nav-link" href="#">Каталог</a>
@@ -46,6 +46,7 @@
                             Регистрация
                         </button>
                     </div>
+                    @endif
                 </div>
             </div>
         </nav>
@@ -182,33 +183,33 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="/register" method="post" class="d-flex flex-column align-items-center">
+                    <form action="{{ route('register') }}" method="post" class="d-flex flex-column align-items-center">
                         @csrf
                         <label class="d-flex flex-column border-bottom mt-2">
                             Фамилия
-                            <input type="text" pattern="[A-Za-zА-Яа-яЁё]"/>
+                            <input type="text" name="surname"/>
                         </label>
                         <label class="d-flex flex-column border-bottom mt-2">
                             Имя
-                            <input type="text" pattern="[A-Za-zА-Яа-яЁё]"/>
+                            <input type="text" name="name"/>
                         </label>
                         <label class="d-flex flex-column border-bottom mt-2">
                             Логин
-                            <input type="text" pattern="[A-Za-zА-Яа-яЁё]"/>
+                            <input type="text" name="login"/>
                         </label>
                         <label class="d-flex flex-column border-bottom mt-2">
                             Почта
-                            <input type="email"/>
+                            <input type="email" name="email"/>
                         </label>
                         <label class="d-flex flex-column border-bottom mt-2">
                             Пароль
-                            <input type="password"/>
+                            <input type="password" name="password"/>
                         </label>
                         <label class="d-flex flex-column border-bottom mt-2">
                             Повторить пароль
                             <input type="password"/>
                         </label>
-                        <input class="m-4 p-2" type="button" value="Зарегистрироваться">
+                        <input class="m-4 p-2" type="submit" value="Зарегистрироваться">
                     </form>
                 </div>
             </div>
