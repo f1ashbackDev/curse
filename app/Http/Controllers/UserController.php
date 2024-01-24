@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    public function indexPage()
+    {
+        return view('index');
+    }
     public function register(Request $request)
     {
         $response = [];
@@ -41,7 +45,7 @@ class UserController extends Controller
                 'message' => 'Регистрация прошла успешно'
             ];
         }
-        return view('index');
+        return redirect('/');
     }
 
     public function login(Request $request)
