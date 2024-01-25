@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, 'indexPage'])->name('indexPage');
 Route::post('/register',[UserController::class,'register'])->name('register');
+Route::get('/admin', function (){
+    return view('test');
+});
