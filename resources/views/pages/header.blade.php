@@ -25,7 +25,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse nav justify-content-end" id="navbarNavAltMarkup">
-                    @if(\Illuminate\Support\Facades\Auth::guard('user')->check())
+                    @if(\Illuminate\Support\Facades\Auth::user())
                     <div class="navbar-nav">
                         <a class="nav-link" aria-current="page" href="index.html">Главная</a>
                         <a class="nav-link" href="#">Каталог</a>

@@ -34,7 +34,7 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <a class="nav-link">Пользователи</a>
-                    <a class="nav-link collapsed" href="{{route('productAdmin')}}">
+                    <a class="nav-link collapsed" href="{{route('showAllCategoriesAdmin')}}">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Категории
                     </a>

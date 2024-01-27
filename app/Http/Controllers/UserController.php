@@ -10,8 +10,18 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+//    public function ewqdas()
+//    {
+//        Auth::guard()->user()->name
+//    }
     public function indexPage()
     {
+        // Пока хз как фиксануть
+//        if(Auth::guard('user')->check()){
+//            return view('index')->layout('pages.header')->with([
+//                'name'=>Auth::user()->name
+//            ]);
+//        }
         return view('index');
     }
     public function register(Request $request)
@@ -37,13 +47,11 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
             $user->save();
-            if (Auth::guard('user')->attempt(['email'=>$request->email, 'password'=>$request->password])){
+
+            if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password])){
                 $request->session()->regenerate();
+                Auth::login($user);
             }
-            $response = [
-                'success' => true,
-                'message' => 'Регистрация прошла успешно'
-            ];
         }
         return redirect('/');
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CatalogsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +22,8 @@ Route::post('/register',[UserController::class,'register'])->name('register');
 Route::get('/admin', function (){
     return view('test');
 });
+
+// Админка
 Route::get('/admin/addproduct', [ProductsController::class, 'addProductAdmin']);
 Route::get('/admin/products', [ProductsController::class, 'showProductAdmin'])->name('productAdmin');
+Route::get('/admin/categories', [CatalogsController::class, 'index'])->name('showAllCategoriesAdmin');
