@@ -23,11 +23,14 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 // Пользователи сайта ( админка )
+Route::get('/admin', function (){
+    return view('new_admin.admin');
+})->name('adminPage');
 Route::get('/admin/users', [AdminController::class, 'showUsers'])->name('showUsers');
-Route::get('/admin/edituser/{id}', [AdminController::class, 'showUpdateUser'])->name('showUpdateUser');
+Route::get('/admin/users/edituser/{id}', [AdminController::class, 'showUpdateUser'])->name('showUpdateUser');
 // Продукты
 Route::get('/admin/addproduct', [ProductsController::class, 'addProductAdmin']);
-Route::get('/admin/products', [ProductsController::class, 'showProductAdmin'])->name('productAdmin');
+Route::get('/admin/products', [ProductsController::class, 'showProduct'])->name('productAdmin');
 // Категории
 Route::get('/admin/categories', [CatalogsController::class, 'index'])->name('showAllCategoriesAdmin');
 Route::get('/admin/addcategories', [CatalogsController::class, 'showCreateCategories'])->name('showCreateCategoriesAdmin');

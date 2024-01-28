@@ -47,7 +47,7 @@
                     <li class="menu-title">Menu</li>
 
                     <li>
-                        <a>Пользователи</a>
+                        <a href="{{ route('showUsers') }}">Пользователи</a>
                         <a href="{{ route('showAllCategoriesAdmin') }}">Каталоги</a>
                         <a>Товары</a>
                     </li>
