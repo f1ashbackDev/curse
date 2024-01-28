@@ -20,6 +20,14 @@ class CatalogsController extends Controller
         return view('new_admin.createCatalog');
     }
 
+    public function showEditCategories($id)
+    {
+        $categories = Catalogs::all()->where('id', '=', $id);
+        return view('new_admin.editCatalogy',[
+            'categories' => $categories
+        ]);
+    }
+
     public function addCategory(Request $request)
     {
         // Замутить проверку перед созданием
@@ -29,11 +37,18 @@ class CatalogsController extends Controller
         return redirect('/admin/categories');
     }
 
-    public function editCategory(Request $request)
+    public function editCategory($id, Request $request)
     {
-        Catalogs::update([
+        Catalogs::where('id', $id)->update([
             'name'=>$request->name
         ]);
+        return redirect('/admin/categories');
+    }
+
+    public function deleteCategory(Catalogs $catalogs, $id)
+    {
+        $catalogs = Catalogs::where('id', $id);
+        $catalogs->delete();
         return redirect('/admin/categories');
     }
 }

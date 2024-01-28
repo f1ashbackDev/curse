@@ -23,9 +23,13 @@ Route::get('/admin', function (){
     return view('new_admin.admin');
 });
 
-// Админка
+// Продукты
 Route::get('/admin/addproduct', [ProductsController::class, 'addProductAdmin']);
 Route::get('/admin/products', [ProductsController::class, 'showProductAdmin'])->name('productAdmin');
+// Категории
 Route::get('/admin/categories', [CatalogsController::class, 'index'])->name('showAllCategoriesAdmin');
 Route::get('/admin/addcategories', [CatalogsController::class, 'showCreateCategories'])->name('showCreateCategoriesAdmin');
 Route::post('/admin/createcategories', [CatalogsController::class, 'addCategory'])->name('createCategoriesAdmin');
+Route::get('/admin/editcategories/{id}', [CatalogsController::class, 'showEditCategories'])->name('editCategories');
+Route::post('/admin/updatecategories/{id}', [CatalogsController::class, 'editCategory'])->name('updateCategories');
+Route::get('/admin/deletecategories/{id}', [CatalogsController::class, 'deleteCategory'])->name('deleteCategories');
