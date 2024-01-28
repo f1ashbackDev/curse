@@ -40,7 +40,7 @@
                                 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
                             </svg>
                         </a>
-                        <a class="nav-link">logout</a>
+                        <a class="nav-link" href="{{ route('logout') }}">Выход</a>
                     </div>
                     @else
                     <div class="navbar-nav">
@@ -161,19 +161,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" class="d-flex flex-column align-items-center">
+                    <form action="{{ route('login') }}" method="post" class="d-flex flex-column align-items-center">
+                        @csrf
                         <label class="d-flex flex-column border-bottom mt-2">
                             Логин
-                            <input type="text" pattern="[A-Za-zА-Яа-яЁё]"/>
+                            <input type="text" name="login"/>
                         </label>
                         <label class="d-flex flex-column border-bottom mt-2">
                             Пароль
-                            <input type="password"/>
+                            <input type="password" name="password"/>
                         </label>
                         <button type="button" class="mt-2" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#resetPass">
                             Забыл пароль
                         </button>
-                        <input class="mt-2 btn-auth" type="button" value="Войти">
+                        <input class="mt-2 btn-auth" type="submit" value="Войти">
                     </form>
                 </div>
             </div>

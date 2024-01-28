@@ -10,18 +10,8 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-//    public function ewqdas()
-//    {
-//        Auth::guard()->user()->name
-//    }
     public function indexPage()
     {
-        // Пока хз как фиксануть
-//        if(Auth::guard('user')->check()){
-//            return view('index')->layout('pages.header')->with([
-//                'name'=>Auth::user()->name
-//            ]);
-//        }
         return view('index');
     }
     public function register(Request $request)
@@ -59,32 +49,21 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $input = $request->all();
-        $response = [];
-        $validator = Validator::make($input,[
-            'email'=>'required|email',
-            'password'=>'required'
-        ]);
-        if ($validator->fails()){
-            $response = [
-                'success'=>false,
-                'message'=>$validator->errors()
-            ];
-        }
         $user = User::all()->where('login','=',$request->login)->first();
-        if (!$user){
-            return redirect('/error')->with([
-                'errors'=>"Нет такого пользователя",
-            ]);
-        }
         if ($user && Hash::check($request->password, $user->password)){
             Auth::guard('user')->login($user);
             $request->session()->regenerate();
         }
-        else{
-            return redirect('/error')->with([
-                'errors'=>"Неправильный пароль",
-            ]);
-        }
-        return redirect('/index');
+        return redirect('/');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

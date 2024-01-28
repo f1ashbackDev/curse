@@ -23,7 +23,7 @@
                 <td>{{$item->email}}</td>
                 <td>{{$item->role}}</td>
                 <td>
-                    <a href="{{route('editCategories', ['id'=> $item->id])}}">Изменить</a>
+                    <a href="{{route('showUpdateUser', ['id'=> $item->id])}}">Изменить</a>
                 </td>
                 <td>
                     <a href="{{ route('deleteCategories', ['id'=>$item->id]) }}">Удалить</a>

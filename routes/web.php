@@ -19,14 +19,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, 'indexPage'])->name('indexPage');
 Route::post('/register',[UserController::class,'register'])->name('register');
-
-Route::get('/admin', function (){
-    return view('new_admin.admin');
-});
+Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 // Пользователи сайта ( админка )
 Route::get('/admin/users', [AdminController::class, 'showUsers'])->name('showUsers');
-
+Route::get('/admin/edituser/{id}', [AdminController::class, 'showUpdateUser'])->name('showUpdateUser');
 // Продукты
 Route::get('/admin/addproduct', [ProductsController::class, 'addProductAdmin']);
 Route::get('/admin/products', [ProductsController::class, 'showProductAdmin'])->name('productAdmin');
