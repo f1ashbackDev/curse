@@ -15,12 +15,17 @@ class Products extends Model
         'name',
         'count',
         'description',
-        'image',
-        'category_id'
+        'category_id',
+        'image_id'
     ];
 
-    public function category()
+    public function getImage()
     {
-        return $this->belongsTo(Catalogs::class);
+        return $this->belongsTo(Image::class, 'id');
+    }
+
+    public function getCategory()
+    {
+        return $this->belongsTo(Catalogs::class, 'id');
     }
 }

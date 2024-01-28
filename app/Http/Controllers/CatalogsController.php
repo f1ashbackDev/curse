@@ -32,7 +32,7 @@ class CatalogsController extends Controller
     {
         // Замутить проверку перед созданием
         $category = new Catalogs();
-        $category->name = $request->name;
+        $category->categories_name = $request->name;
         $category->save();
         return redirect('/admin/categories');
     }

@@ -16,9 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->bigInteger('count')->default(0);
             $table->string('description');
-            $table->string('image');
             $table->foreignId('category_id')
                 ->constrained('categories')
+                ->cascadeOnDelete();
+            $table->foreignId('image_id')
+                ->constrained('images')
                 ->cascadeOnDelete();
             $table->timestamps();
         });

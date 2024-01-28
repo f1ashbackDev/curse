@@ -49,7 +49,7 @@
                     <li>
                         <a href="{{ route('showUsers') }}">Пользователи</a>
                         <a href="{{ route('showAllCategoriesAdmin') }}">Каталоги</a>
-                        <a>Товары</a>
+                        <a href="{{ route('productAdmin') }}">Товары</a>
                     </li>
                 </ul>
             </div>

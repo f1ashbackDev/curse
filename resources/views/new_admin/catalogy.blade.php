@@ -14,7 +14,7 @@
         @foreach($category as $item)
             <tr>
                 <td>{{$item->id}}</td>
-                <td>{{$item->name}}</td>
+                <td>{{$item->categories_name}}</td>
                 <td>
                     <a href="{{route('editCategories', ['id'=> $item->id])}}">Изменить</a>
                 </td>

@@ -9,5 +9,5 @@ class Catalogs extends Model
 {
     use HasFactory;
     protected $table = 'categories';
-    protected $fillable = ['id', 'name'];
+    protected $fillable = ['id', 'categories_name'];
 }
