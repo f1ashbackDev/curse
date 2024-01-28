@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CatalogsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
@@ -22,6 +23,9 @@ Route::post('/register',[UserController::class,'register'])->name('register');
 Route::get('/admin', function (){
     return view('new_admin.admin');
 });
+
+// Пользователи сайта ( админка )
+Route::get('/admin/users', [AdminController::class, 'showUsers'])->name('showUsers');
 
 // Продукты
 Route::get('/admin/addproduct', [ProductsController::class, 'addProductAdmin']);
