@@ -10,9 +10,14 @@ class CatalogsController extends Controller
     // Показ всех категорий товаров
     public function index()
     {
-        return view('admins.catalogs')->with([
+        return view('new_admin.catalogy')->with([
             'category'=>Catalogs::all()
         ]);
+    }
+
+    public function showCreateCategories()
+    {
+        return view('new_admin.createCatalog');
     }
 
     public function addCategory(Request $request)

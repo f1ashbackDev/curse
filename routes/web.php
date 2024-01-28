@@ -20,10 +20,12 @@ Route::get('/', [UserController::class, 'indexPage'])->name('indexPage');
 Route::post('/register',[UserController::class,'register'])->name('register');
 
 Route::get('/admin', function (){
-    return view('test');
+    return view('new_admin.admin');
 });
 
 // Админка
 Route::get('/admin/addproduct', [ProductsController::class, 'addProductAdmin']);
 Route::get('/admin/products', [ProductsController::class, 'showProductAdmin'])->name('productAdmin');
 Route::get('/admin/categories', [CatalogsController::class, 'index'])->name('showAllCategoriesAdmin');
+Route::get('/admin/addcategories', [CatalogsController::class, 'showCreateCategories'])->name('showCreateCategoriesAdmin');
+Route::post('/admin/createcategories', [CatalogsController::class, 'addCategory'])->name('createCategoriesAdmin');
