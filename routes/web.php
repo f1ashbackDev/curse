@@ -29,7 +29,7 @@ Route::get('/admin', function (){
 Route::get('/admin/users', [AdminController::class, 'showUsers'])->name('showUsers');
 Route::get('/admin/users/edituser/{id}', [AdminController::class, 'showUpdateUser'])->name('showUpdateUser');
 // Продукты
-Route::get('/admin/addproduct', [ProductsController::class, 'addProductAdmin']);
+Route::get('/admin/addproduct', [ProductsController::class, 'showAddProduct'])->name('showAddProduct');
 Route::get('/admin/products', [ProductsController::class, 'showProduct'])->name('productAdmin');
 // Категории
 Route::get('/admin/categories', [CatalogsController::class, 'index'])->name('showAllCategoriesAdmin');
