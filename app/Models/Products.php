@@ -18,7 +18,12 @@ class Products extends Model
         'category_id'
     ];
 
-    public function getCategory()
+    public function image(): \Illuminate\Database\Eloquent\Relations\hasMany
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    public function category()
     {
         return $this->belongsTo(Catalogs::class, 'category_id');
     }

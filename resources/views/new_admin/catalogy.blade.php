@@ -5,7 +5,7 @@
         <a class="m-2" href="{{route('showCreateCategoriesAdmin')}}">Добавить каталог</a>
     </div>
 
-    <table>
+    <table class="table table-bordered">
         <tr>
             <th>Номер каталога</th>
             <th>Название каталога</th>
@@ -17,8 +17,6 @@
                 <td>{{$item->categories_name}}</td>
                 <td>
                     <a href="{{route('editCategories', ['id'=> $item->id])}}">Изменить</a>
-                </td>
-                <td>
                     <a href="{{ route('deleteCategories', ['id'=>$item->id]) }}">Удалить</a>
                 </td>
             </tr>

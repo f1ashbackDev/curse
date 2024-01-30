@@ -31,6 +31,7 @@ Route::get('/admin/users/edituser/{id}', [AdminController::class, 'showUpdateUse
 // Продукты
 Route::get('/admin/addproduct', [ProductsController::class, 'showAddProduct'])->name('showAddProduct');
 Route::get('/admin/products', [ProductsController::class, 'showProduct'])->name('productAdmin');
+Route::post('/admin/createproduct', [ProductsController::class, 'addProduct'])->name('createProduct');
 // Категории
 Route::get('/admin/categories', [CatalogsController::class, 'index'])->name('showAllCategoriesAdmin');
 Route::get('/admin/addcategories', [CatalogsController::class, 'showCreateCategories'])->name('showCreateCategoriesAdmin');

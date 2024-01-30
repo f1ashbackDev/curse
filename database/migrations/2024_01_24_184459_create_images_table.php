@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->id();
             $table->string('image');
-            $table->foreignId('product_id')
-                ->constrained('products')
-                ->cascadeOnDelete();
-            $table->timestamps();
+
+            $table->foreignIdFor(\App\Models\Products::class)
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
         });
     }
 

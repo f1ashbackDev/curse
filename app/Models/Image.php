@@ -14,10 +14,12 @@ class Image extends Model
         'product_id'
     ];
 
-//    public function getImage()
-//    {
-//        return url('/storage/'. $this->attributes['image']);
-//    }
+    public $timestamps = false;
+
+    public function getImage()
+    {
+        return url('/storage/'. $this->attributes['image']);
+    }
 
     public function setImageAttributes($value)
     {
