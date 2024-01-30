@@ -10,13 +10,14 @@ class Image extends Model
     use HasFactory;
     protected $fillable = [
         'id',
-        'image'
+        'image',
+        'product_id'
     ];
 
-    public function getImage()
-    {
-        return url('/storage/'. $this->attributes['image']);
-    }
+//    public function getImage()
+//    {
+//        return url('/storage/'. $this->attributes['image']);
+//    }
 
     public function setImageAttributes($value)
     {
@@ -24,8 +25,8 @@ class Image extends Model
     }
 
     // Получение фотографии
-    public function product()
+    public function getProduct()
     {
-        return $this->belongsTo(Products::class, 'image_id');
+        return $this->belongsTo(Products::class, 'product_id');
     }
 }

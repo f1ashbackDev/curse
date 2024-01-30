@@ -5,6 +5,11 @@
         <a href="{{ route('showAddProduct') }}">Добавить товар</a>
     </div>
     <p>{{$products}}</p>
+
+
+    <p>{{ $image }}</p>
+
+
     <table>
         <tr>
             <th>Номер продукта</th>
@@ -16,20 +21,16 @@
             <th>Действие</th>
         </tr>
         @foreach($products as $item)
-            <tr>
-                <td>{{$item->id}}</td>
-                <td>{{$item->name}}</td>
-                <td>{{$item->count}}</td>
-                <td>{{$item->description}}</td>
-                <td>{{$item->getCategory->categories_name}}</td>
-                <td>{{$item->getImage->image}}</td>
-{{--                <td>--}}
-{{--                    <a href="{{route('', ['id'=> $item->id])}}">Изменить</a>--}}
-{{--                </td>--}}
-{{--                <td>--}}
-{{--                    <a href="{{ route('', ['id'=>$item->id]) }}">Удалить</a>--}}
-{{--                </td>--}}
-            </tr>
+            @foreach($image as $item_img)
+                <tr>
+                    <td>{{$item->id}}</td>
+                    <td>{{$item->name}}</td>
+                    <td>{{$item->count}}</td>
+                    <td>{{$item->description}}</td>
+                    <td>{{$item->getCategory->categories_name}}</td>
+                    <td>{{$item_img->image}}</td>
+                </tr>
+            @endforeach
         @endforeach
     </table>
 @endsection
