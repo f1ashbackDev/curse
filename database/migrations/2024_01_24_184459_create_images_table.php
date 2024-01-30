@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('images', function (Blueprint $table) {
+            $table->id();
             $table->string('image');
-
             $table->foreignIdFor(\App\Models\Products::class)
                 ->constrained()
                 ->cascadeOnDelete()

@@ -31,8 +31,8 @@
                         <td>Нет фотографии</td>
                     @endif
                     <td>
-                        <a>Изменить</a>
-                        <a>Удалить</a>
+                        <a href="{{ route('editProduct', ['id' => $item->id]) }}">Изменить</a>
+                        <a href="{{ route('deleteProduct', ['id' => $item->id]) }}">Удалить</a>
                     </td>
                 </tr>
             @endforeach

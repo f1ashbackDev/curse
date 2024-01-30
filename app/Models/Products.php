@@ -23,7 +23,7 @@ class Products extends Model
         return $this->hasMany(Image::class);
     }
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Catalogs::class, 'category_id');
     }
