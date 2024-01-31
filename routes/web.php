@@ -23,6 +23,8 @@ Route::post('/register',[UserController::class,'register'])->name('register');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/basket', [BasketController::class, 'basket'])->name('basket');
+Route::get('/basket/remove/{id}', [BasketController::class, 'clearBasket'])->name('clearBasket');
+Route::get('/basket/add/{id}', [BasketController::class, 'addBasket'])->name('addBasket');
 
 // Пользователи сайта ( админка )
 Route::get('/admin', function (){

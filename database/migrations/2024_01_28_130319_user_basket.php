@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('product_id')
                 ->constrained('products')
                 ->cascadeOnDelete();
-            $table->bigInteger('count')->default(0);
+            $table->bigInteger('count')->default(1);
             $table->timestamps();
         });
     }

@@ -17,4 +17,20 @@ class BasketController extends Controller
             'basket' => $basket
         ]);
     }
+
+    public function addBasket($id)
+    {
+        $basket = Basket::create([
+            'user_id' => Auth::id(),
+            'product_id' => $id
+        ]);
+        return redirect('/');
+    }
+
+    public function clearBasket($id)
+    {
+        $basket = Basket::find($id);
+        $basket->delete();
+        return redirect('/basket');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,9 @@ class UserController extends Controller
 {
     public function indexPage()
     {
-        return view('index');
+        return view('index',[
+            'products' => Products::with('image')->get()
+        ]);
     }
     public function register(Request $request)
     {
