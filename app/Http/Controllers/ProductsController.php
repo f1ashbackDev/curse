@@ -40,6 +40,7 @@ class ProductsController extends Controller
         $product = Products::create([
             'name' => $request->name,
             'count' => $request->count,
+            'price' => $request->price,
             'description' => $request->description,
             'category_id' => $request->category
         ]);
@@ -56,7 +57,6 @@ class ProductsController extends Controller
 
     public function editProduct(Request $request, $id)
     {
-
         return redirect('/admin/product');
     }
 

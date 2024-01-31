@@ -10,6 +10,7 @@
                 <th>Номер продукта</th>
                 <th>Название</th>
                 <th>Цена</th>
+                <th>Количество на складе</th>
                 <th>Описание</th>
                 <th>Каталог</th>
                 <th>Фотографии</th>
@@ -21,6 +22,7 @@
                 <tr>
                     <td>{{$item->id}}</td>
                     <td>{{$item->name}}</td>
+                    <td>{{$item->price}}</td>
                     <td>{{$item->count}}</td>
                     <td>{{$item->description}}</td>
                     <td>{{$item->category->categories_name}}</td>

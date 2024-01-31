@@ -14,6 +14,7 @@ class Products extends Model
         'id',
         'name',
         'count',
+        'price',
         'description',
         'category_id'
     ];

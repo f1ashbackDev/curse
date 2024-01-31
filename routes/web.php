@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CatalogsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
@@ -21,6 +22,7 @@ Route::get('/', [UserController::class, 'indexPage'])->name('indexPage');
 Route::post('/register',[UserController::class,'register'])->name('register');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/basket', [BasketController::class, 'basket'])->name('basket');
 
 // Пользователи сайта ( админка )
 Route::get('/admin', function (){
