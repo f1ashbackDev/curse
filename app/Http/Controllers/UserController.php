@@ -54,7 +54,7 @@ class UserController extends Controller
         $input = $request->all();
         $user = User::all()->where('login','=',$request->login)->first();
         if ($user && Hash::check($request->password, $user->password)){
-            Auth::guard('user')->login($user);
+            Auth::login($user);
             $request->session()->regenerate();
         }
         return redirect('/');

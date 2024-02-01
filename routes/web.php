@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CatalogsController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +27,8 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/basket', [BasketController::class, 'basket'])->name('basket');
 Route::get('/basket/remove/{id}', [BasketController::class, 'clearBasket'])->name('clearBasket');
 Route::get('/basket/add/{id}', [BasketController::class, 'addBasket'])->name('addBasket');
+Route::get('/user/orders', [OrderController::class, 'index'])->name('order');
+Route::get('/user/order/{id}', [OrderItemController::class, 'store'])->name('orderItem');
 
 // Пользователи сайта ( админка )
 Route::get('/admin', function (){
