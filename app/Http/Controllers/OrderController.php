@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Basket;
 use App\Models\Order;
 use App\Models\OrderItems;
 use Illuminate\Http\Request;
@@ -22,20 +23,23 @@ class OrderController extends Controller
 
     }
 
-    public function create(Request $request): string
+    public function create(): string
     {
+        $user_basket = Basket::where('user_id', '=', Auth::id())->get();
         $order = Order::create([
-            'user_id' => Auth::id(),
-            'price' => $request->price
+            'user_id' => Auth::id()
         ]);
 
-        $orderItem = OrderItems::create([
-            'order_id' => $order->id,
-            'product_id' => $request->product_id,
-            'count' => $request->count
-        ]);
-
-        return route('index');
+        foreach ($user_basket as $item)
+        {
+            OrderItems::create([
+               'order_id' => $order->id,
+               'product_id' => $item->product_id,
+                'count' => $item->count,
+                'sum' => $item->count * $item->product_sum
+            ]);
+        }
+        return redirect('/user/orders');
     }
 
     public function update()

@@ -39,6 +39,6 @@
                 @endforeach
             </tbody>
         </table>
-        <a href="#" class="text-decoration-none">Перейти к оформлению</a>
+        <a href="{{ route('createOrder') }}" class="text-decoration-none">Перейти к оформлению</a>
     </div>
 @endsection

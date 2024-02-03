@@ -29,7 +29,7 @@
                                 {{ $product->price }}
                             </td>
                             <td>
-                                {{ $product->count }}
+                                {{ $item->count }}
                             </td>
                             <td>
                                 {{ $item->sum }}

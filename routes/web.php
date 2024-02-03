@@ -27,6 +27,7 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/basket', [BasketController::class, 'basket'])->name('basket');
 Route::get('/basket/remove/{id}', [BasketController::class, 'clearBasket'])->name('clearBasket');
 Route::get('/basket/add/{id}', [BasketController::class, 'addBasket'])->name('addBasket');
+Route::get('/user/order/create', [OrderController::class, 'create'])->name('createOrder');
 Route::get('/user/orders', [OrderController::class, 'index'])->name('order');
 Route::get('/user/order/{id}', [OrderItemController::class, 'store'])->name('orderItem');
 
@@ -37,11 +38,11 @@ Route::get('/admin', function (){
 Route::get('/admin/users', [AdminController::class, 'showUsers'])->name('showUsers');
 Route::get('/admin/user/edit/{id}', [AdminController::class, 'showUpdateUser'])->name('showUpdateUser');
 // Продукты
-Route::get('/admin/products', [ProductsController::class, 'showProduct'])->name('productAdmin');
+Route::get('/admin/products', [ProductsController::class, 'index'])->name('productAdmin');
 Route::get('/admin/product/add', [ProductsController::class, 'showAddProduct'])->name('showAddProduct');
-Route::post('/admin/product/create', [ProductsController::class, 'addProduct'])->name('createProduct');
+Route::post('/admin/product/create', [ProductsController::class, 'create'])->name('createProduct');
 Route::get('/admin/product/edit/{id}', [ProductsController::class, 'showEditProduct'])->name('editProduct');
-Route::get('/admin/product/delete/{id}', [ProductsController::class, 'deleteProduct'])->name('deleteProduct');
+Route::get('/admin/product/delete/{id}', [ProductsController::class, 'delete'])->name('deleteProduct');
 // Категории
 Route::get('/admin/categories', [CatalogsController::class, 'index'])->name('showAllCategoriesAdmin');
 Route::get('/admin/categories/add', [CatalogsController::class, 'showCreateCategories'])->name('showCreateCategoriesAdmin');
@@ -49,3 +50,6 @@ Route::post('/admin/categories/create', [CatalogsController::class, 'addCategory
 Route::get('/admin/categories/edit/{id}', [CatalogsController::class, 'showEditCategories'])->name('editCategories');
 Route::post('/admin/categories/update/{id}', [CatalogsController::class, 'editCategory'])->name('updateCategories');
 Route::get('/admin/categories/delete/{id}', [CatalogsController::class, 'deleteCategory'])->name('deleteCategories');
+// Заказы сайта
+Route::get('/admin/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('ordersAdmin');
+Route::get('/admin/orders/{id}',[\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('showOrdersAdmin');

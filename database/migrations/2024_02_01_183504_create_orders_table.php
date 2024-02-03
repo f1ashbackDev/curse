@@ -19,7 +19,6 @@ return new class extends Migration
                 ->on('users')
                 ->nullOnDelete();
             $table->string('status')->default('Создан');
-            $table->bigInteger('price');
             $table->timestamps();
         });
     }

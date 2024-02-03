@@ -20,11 +20,13 @@ class BasketController extends Controller
 
     public function addBasket($id)
     {
+        $product = Products::where('id', '=', $id)->first();
         $basket = Basket::create([
             'user_id' => Auth::id(),
-            'product_id' => $id
+            'product_id' => $id,
+            'product_sum' => $product->price
         ]);
-        return redirect('/');
+        return route('indexPage');
     }
 
     public function clearBasket($id)

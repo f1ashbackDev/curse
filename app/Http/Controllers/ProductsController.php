@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
-    public function showProduct()
+    public function index()
     {
         return view('new_admin.product', [
             'products' => Products::with('image', 'category')->get()
@@ -35,7 +35,7 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function addProduct(Request $request)
+    public function create(Request $request)
     {
         $product = Products::create([
             'name' => $request->name,
@@ -60,7 +60,12 @@ class ProductsController extends Controller
         return redirect('/admin/product');
     }
 
-    public function deleteProduct($id)
+    public function update()
+    {
+
+    }
+
+    public function delete($id)
     {
         $image = Products::find($id)->image;
         foreach ($image as $item){

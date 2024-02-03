@@ -13,7 +13,8 @@ class Basket extends Model
         'id',
         'user_id',
         'product_id',
-        'count'
+        'count',
+        'product_sum'
     ];
 
     // Костыль

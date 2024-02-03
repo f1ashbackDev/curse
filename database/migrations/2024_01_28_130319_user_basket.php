@@ -20,6 +20,7 @@ return new class extends Migration
                 ->constrained('products')
                 ->cascadeOnDelete();
             $table->bigInteger('count')->default(1);
+            $table->bigInteger('product_sum')->default(1);
             $table->timestamps();
         });
     }

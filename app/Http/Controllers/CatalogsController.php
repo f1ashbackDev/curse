@@ -40,7 +40,7 @@ class CatalogsController extends Controller
     public function editCategory($id, Request $request)
     {
         Catalogs::where('id', $id)->update([
-            'name'=>$request->name
+            'categories_name'=>$request->name
         ]);
         return redirect('/admin/categories');
     }
