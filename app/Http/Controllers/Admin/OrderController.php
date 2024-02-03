@@ -26,13 +26,9 @@ class OrderController extends Controller
         ]);
     }
 
-    public function update()
+    public function update(Request $request, Order $order)
     {
-
-    }
-
-    public function delete()
-    {
-
+        $order->update($request->all());
+        return redirect('/admin/orders');
     }
 }

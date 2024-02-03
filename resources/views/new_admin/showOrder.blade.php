@@ -3,7 +3,20 @@
     <div class="d-flex">
         <h2>Заказ №{{$orders->id}}</h2>
     </div>
-    <p>Статус заказа: {{ $orders->status }}</p>
+
+    <form action="{{ route('updateOrdersAdmin', ['order' => $orders->id]) }}" method="post">
+        @csrf
+        <label>
+            Статус заказа:
+            <select name="status">
+                <option value="Создан" @selected($orders->status == 'Создан')>Создан</option>
+                <option value="Обработка" @selected($orders->status == 'Обработка')>Обработка</option>
+                <option value="Отправка" @selected($orders->status == 'Отправка')>Отправка</option>
+                <option value="Доставлен" @selected($orders->status == 'Доставлен')>Доставлен</option>
+            </select>
+        </label>
+        <input type="submit" value="Сохранить">
+    </form>
 
     <table class="table">
         <thead>

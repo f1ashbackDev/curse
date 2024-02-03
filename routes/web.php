@@ -53,3 +53,4 @@ Route::get('/admin/categories/delete/{id}', [CatalogsController::class, 'deleteC
 // Заказы сайта
 Route::get('/admin/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('ordersAdmin');
 Route::get('/admin/orders/{id}',[\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('showOrdersAdmin');
+Route::post('/admin/orders/update/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'update'])->name('updateOrdersAdmin');
