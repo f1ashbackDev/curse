@@ -24,15 +24,18 @@ Route::get('/', [UserController::class, 'indexPage'])->name('indexPage');
 Route::post('/register',[UserController::class,'register'])->name('register');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-Route::get('/basket', [BasketController::class, 'basket'])->name('basket');
-Route::get('/basket/remove/{id}', [BasketController::class, 'clearBasket'])->name('clearBasket');
-Route::get('/basket/add/{id}', [BasketController::class, 'addBasket'])->name('addBasket');
-Route::post('/basket/update/{id}', [BasketController::class, 'update'])->name('updateBasket');
-Route::get('/user/order/create', [OrderController::class, 'create'])->name('createOrder');
-Route::get('/user/orders', [OrderController::class, 'index'])->name('order');
-Route::get('/user/order/{id}', [OrderItemController::class, 'store'])->name('orderItem');
 
-
+Route::prefix('user')->group(function (){
+    // Корзина
+    Route::get('/basket', [BasketController::class, 'show'])->name('basket');
+    Route::get('/basket/{id}/store', [BasketController::class, 'store'])->name('basket.store');
+    Route::post('/basket/{basket}/update', [BasketController::class, 'update'])->name('basket.update');
+    Route::get('/basket/{basket}/delete', [BasketController::class, 'delete'])->name('basket.delete');
+    // Заказы
+    Route::get('orders', [OrderController::class, 'index'])->name('order');
+    Route::get('order/create', [OrderController::class, 'create'])->name('order.store');
+    Route::get('order/{id}', [OrderItemController::class, 'store'])->name('order.item.store');
+});
 
 Route::prefix('admin')->group(function (){
     Route::get('/', function (){

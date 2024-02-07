@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class BasketController extends Controller
 {
-    public function basket()
+
+    public function show()
     {
         $basket = Basket::with('product', 'productImage')->where('user_id', '=', Auth::id())->get();
         return view('basket', [
@@ -18,7 +19,7 @@ class BasketController extends Controller
         ]);
     }
 
-    public function addBasket($id)
+    public function store($id)
     {
         $product = Products::where('id', '=', $id)->first();
         $basket = Basket::create([
@@ -29,17 +30,14 @@ class BasketController extends Controller
         return route('indexPage');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Basket $basket)
     {
-        $basket = Basket::find($id);
-        $basket->count = $request->count;
-        $basket->save();
+        $basket->update($request->all());
         return response()->json($request);
     }
 
-    public function clearBasket($id)
+    public function delete(Basket $basket)
     {
-        $basket = Basket::find($id);
         $basket->delete();
         return redirect('/basket');
     }

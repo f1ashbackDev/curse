@@ -20,7 +20,7 @@ class ProductsController extends Controller
 
     public function create()
     {
-        return view('new_admin.addProduct', [
+        return view('new_admin.product-add', [
            'categories' => Catalogs::all()
         ]);
     }
@@ -47,7 +47,7 @@ class ProductsController extends Controller
 
     public function edit(Products $products)
     {
-        return view('new_admin.editProduct', [
+        return view('new_admin.product-edit', [
            'product' => $products,
            'image' => $products->image,
            'name_category' => $products->category->categories_name,
@@ -63,7 +63,8 @@ class ProductsController extends Controller
 
     public function delete(Products $products)
     {
-        foreach ($products->image() as $item){
+        $image = Image::where(['products_id' => $products->id])->get();
+        foreach ($image as $item){
             Storage::disk('public')->delete($item->image);
             $item->delete();
         }
