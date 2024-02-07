@@ -32,12 +32,15 @@ Route::get('/user/order/create', [OrderController::class, 'create'])->name('crea
 Route::get('/user/orders', [OrderController::class, 'index'])->name('order');
 Route::get('/user/order/{id}', [OrderItemController::class, 'store'])->name('orderItem');
 
+
+
 // Пользователи сайта ( админка )
 Route::get('/admin', function (){
     return view('new_admin.admin');
 })->name('adminPage');
 Route::get('/admin/users', [AdminController::class, 'showUsers'])->name('showUsers');
 Route::get('/admin/user/edit/{id}', [AdminController::class, 'showUpdateUser'])->name('showUpdateUser');
+Route::post('/admin/user/update/{id}', [AdminController::class, 'update'])->name('updateUser');
 // Продукты
 Route::get('/admin/products', [ProductsController::class, 'index'])->name('productAdmin');
 Route::get('/admin/product/add', [ProductsController::class, 'showAddProduct'])->name('showAddProduct');

@@ -41,14 +41,4 @@ class OrderController extends Controller
         }
         return redirect('/user/orders');
     }
-
-    public function update()
-    {
-//        return redirect('/user/basket');
-    }
-
-    public function delete()
-    {
-
-    }
 }

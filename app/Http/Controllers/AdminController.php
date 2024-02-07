@@ -22,8 +22,11 @@ class AdminController extends Controller
         ]);
     }
 
-    public function updateUsers(Request $request, $id)
+    public function update(Request $request, $id)
     {
+        $user = User::find($id)->first();
+        $user->role = $request->role;
+        $user->save();
         return redirect('/admin/users');
     }
 
