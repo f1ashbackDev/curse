@@ -29,6 +29,14 @@ class BasketController extends Controller
         return route('indexPage');
     }
 
+    public function update(Request $request, $id)
+    {
+        $basket = Basket::find($id);
+        $basket->count = $request->count;
+        $basket->save();
+        return response()->json($request);
+    }
+
     public function clearBasket($id)
     {
         $basket = Basket::find($id);

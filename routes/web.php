@@ -27,6 +27,7 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/basket', [BasketController::class, 'basket'])->name('basket');
 Route::get('/basket/remove/{id}', [BasketController::class, 'clearBasket'])->name('clearBasket');
 Route::get('/basket/add/{id}', [BasketController::class, 'addBasket'])->name('addBasket');
+Route::post('/basket/update/{id}', [BasketController::class, 'update'])->name('updateBasket');
 Route::get('/user/order/create', [OrderController::class, 'create'])->name('createOrder');
 Route::get('/user/orders', [OrderController::class, 'index'])->name('order');
 Route::get('/user/order/{id}', [OrderItemController::class, 'store'])->name('orderItem');

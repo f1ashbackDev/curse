@@ -2,9 +2,9 @@
 @section('content')
     <div class="container">
         <h2>Корзина пользователя</h2>
-
-        <table class="table">
-            <thead>
+        @if(count($basket))
+            <table class="table">
+                <thead>
                 <tr>
                     <th>Фото</th>
                     <th>Наименование</th>
@@ -13,8 +13,8 @@
                     <th>Сумма</th>
                     <th></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @foreach($basket as $item)
                     @foreach($item->product as $product)
                         <tr>
@@ -24,9 +24,15 @@
                                    height: 67px"/>
                             </td>
                             <td>{{$product->name}}</td>
-                            <td>{{$product->price}}</td>
-                            <td>{{$item->count}}</td>
-                            <td>10</td>
+                            <td id="product-{{$item->id}}">{{$product->price}}</td>
+                            <td>
+                                <div class="d-flex">
+                                    <button class="m-2" onclick="add({{$item->id}})">+</button>
+                                    <p class="m-2" id="{{$item->id}}">{{$item->count}}</p>
+                                    <button class="m-2" onclick="remove({{$item->id}})">-</button>
+                                </div>
+                            </td>
+                            <td id="result-{{$item->id}}">{{ $product->price * $item->count }}</td>
                             <td>
                                 <a href="{{ route('clearBasket', [$item->id]) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
@@ -37,8 +43,64 @@
                         </tr>
                     @endforeach
                 @endforeach
-            </tbody>
-        </table>
-        <a href="{{ route('createOrder') }}" class="text-decoration-none">Перейти к оформлению</a>
+                </tbody>
+            </table>
+            <a href="{{ route('createOrder') }}" class="text-decoration-none">Перейти к оформлению</a>
+        @else
+            <p>Корзина пустая</p>
+        @endif
     </div>
+@endsection
+@section('js-scripts')
+    <script type="text/javascript">
+        let csrf_token = document.head.querySelector('meta[name="csrf-token"]')
+        const add = (id) => {
+            const count = document.getElementById(id);
+            const productSum = document.getElementById(`product-${id}`)
+            const resultSum = document.getElementById(`result-${id}`)
+            count.textContent++;
+            resultSum.textContent = productSum.textContent * count.textContent
+            fetch(`basket/update/${id}`,{
+                method: 'post',
+                body: JSON.stringify({
+                    count: count.textContent
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    "X-CSRF-Token": csrf_token.content
+                }
+            }).then(
+                response => {
+                    return console.log(response)
+                }
+            ).catch(
+                error => console.log(error)
+            )
+        }
+        const remove = (id) => {
+            const count = document.getElementById(id);
+            const productSum = document.getElementById(`product-${id}`)
+            const resultSum = document.getElementById(`result-${id}`)
+            if(count.textContent > 1){
+                count.textContent--;
+                resultSum.textContent = productSum.textContent / count.textContent
+            }
+            fetch(`basket/update/${id}`,{
+                method: 'post',
+                body: JSON.stringify({
+                    count: count.textContent
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    "X-CSRF-Token": csrf_token.content
+                }
+            }).then(
+                response => {
+                    return console.log(response)
+                }
+            ).catch(
+                error => console.log(error)
+            )
+        }
+    </script>
 @endsection

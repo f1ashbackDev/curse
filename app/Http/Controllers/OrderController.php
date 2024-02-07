@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Basket;
 use App\Models\Order;
 use App\Models\OrderItems;
+use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,11 +19,6 @@ class OrderController extends Controller
         ]);
     }
 
-    public function store()
-    {
-
-    }
-
     public function create(): string
     {
         $user_basket = Basket::where('user_id', '=', Auth::id())->get();
@@ -32,19 +28,23 @@ class OrderController extends Controller
 
         foreach ($user_basket as $item)
         {
+            $product_count = Products::find($item->product_id);
+            $product_count->count = $product_count->count - $item->count;
+            $product_count->save();
             OrderItems::create([
                'order_id' => $order->id,
                'product_id' => $item->product_id,
                 'count' => $item->count,
                 'sum' => $item->count * $item->product_sum
             ]);
+            $item->delete();
         }
         return redirect('/user/orders');
     }
 
     public function update()
     {
-
+//        return redirect('/user/basket');
     }
 
     public function delete()
