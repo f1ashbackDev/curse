@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Catalogs;
 use App\Models\Image;
 use App\Models\Products;
@@ -12,30 +13,19 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        return view('new_admin.product', [
+        return view('new_admin.product',[
             'products' => Products::with('image', 'category')->get()
         ]);
     }
 
-    public function showAddProduct()
+    public function create()
     {
         return view('new_admin.addProduct', [
-            'categories' => Catalogs::all()
+           'categories' => Catalogs::all()
         ]);
     }
 
-    public function showEditProduct($id)
-    {
-        $product = Products::find($id);
-        return view('new_admin.editProduct', [
-           'product' => $product,
-           'image' => $product->image,
-           'name_category' => $product->category->categories_name,
-            'category' => Catalogs::all()
-        ]);
-    }
-
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $product = Products::create([
             'name' => $request->name,
@@ -52,27 +42,32 @@ class ProductsController extends Controller
             $image->products_id = $product->id;
             $image->save();
         }
-        return redirect('/admin/products');
+        return redirect()->route('admin.products.index');
     }
 
-    public function editProduct(Request $request, $id)
+    public function edit(Products $products)
     {
-        return redirect('/admin/product');
+        return view('new_admin.editProduct', [
+           'product' => $products,
+           'image' => $products->image,
+           'name_category' => $products->category->categories_name,
+            'category' => Catalogs::all()
+        ]);
     }
 
-    public function update()
+    public function update(Request $request, Products $products)
     {
-
+        $products->update($request->all());
+        return redirect()->route('admin.products.index');
     }
 
-    public function delete($id)
+    public function delete(Products $products)
     {
-        $image = Products::find($id)->image;
-        foreach ($image as $item){
+        foreach ($products->image() as $item){
             Storage::disk('public')->delete($item->image);
             $item->delete();
         }
-        Products::find($id)->delete();
-        return redirect('/admin/products');
+        $products->delete();
+        return redirect()->route('admin.products.index');
     }
 }

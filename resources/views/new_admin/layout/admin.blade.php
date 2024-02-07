@@ -47,10 +47,10 @@
                     <li class="menu-title">Menu</li>
 
                     <li>
-                        <a href="{{ route('showUsers') }}">Пользователи</a>
-                        <a href="{{ route('showAllCategoriesAdmin') }}">Каталоги</a>
-                        <a href="{{ route('productAdmin') }}">Товары</a>
-                        <a>Заказы</a>
+                        <a href="{{ route('admin.users.index') }}">Пользователи</a>
+                        <a href="{{ route('admin.category.index') }}">Каталоги</a>
+                        <a href="{{ route('admin.products.index') }}">Товары</a>
+                        <a href="{{ route('admin.orders.index') }}">Заказы</a>
                     </li>
                 </ul>
             </div>

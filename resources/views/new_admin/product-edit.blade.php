@@ -1,13 +1,15 @@
-@extends('new_admin.admin')
+@extends('new_admin.layout.admin')
 @section('content')
     <h2>Изменение продукта:</h2>
-    <form method="post" action="{{ route('createProduct') }}" enctype="multipart/form-data" class="d-flex flex-column">
+    <form method="post" action="{{ route('admin.products.update', $product) }}" enctype="multipart/form-data"
+          class="d-flex flex-column">
         @csrf
         <label>
             Текущее название: {{ $product->name }}
             <input type="text" placeholder="Введите новое название" name="name"/>
         </label>
         <label>
+            Текущая цена: {{ $product->price }}
             <input type="number" placeholder="Цена товара" name="price"/>
         </label>
         <label>

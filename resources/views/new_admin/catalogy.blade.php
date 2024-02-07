@@ -1,8 +1,8 @@
-@extends('new_admin.admin')
+@extends('new_admin.layout.admin')
 @section('content')
     <div class="d-flex">
         <h2>Каталоги сайта</h2>
-        <a class="m-2" href="{{route('showCreateCategoriesAdmin')}}">Добавить каталог</a>
+        <a class="m-2" href="{{route('admin.category.create')}}">Добавить каталог</a>
     </div>
 
     <table class="table table-bordered">
@@ -16,8 +16,8 @@
                 <td>{{$item->id}}</td>
                 <td>{{$item->categories_name}}</td>
                 <td>
-                    <a href="{{route('editCategories', ['id'=> $item->id])}}">Изменить</a>
-                    <a href="{{ route('deleteCategories', ['id'=>$item->id]) }}">Удалить</a>
+                    <a href="{{route('admin.category.edit', $item)}}">Изменить</a>
+                    <a href="{{ route('admin.category.delete', $item) }}">Удалить</a>
                 </td>
             </tr>
         @endforeach

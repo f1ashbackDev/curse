@@ -1,15 +1,15 @@
-@extends('new_admin.admin')
+@extends('new_admin.layout.admin')
 @section('content')
     <div class="d-flex">
         <h2>Заказы</h2>
     </div>
     <table class="table">
         <thead>
-            <tr>
-                <th>Номер заказа</th>
-                <th>Статус заказа</th>
-                <th>Действие</th>
-            </tr>
+        <tr>
+            <th>Номер заказа</th>
+            <th>Статус заказа</th>
+            <th>Действие</th>
+        </tr>
         </thead>
         <tbody>
         @foreach($orders as $item)
@@ -21,7 +21,7 @@
                     {{ $item->status }}
                 </td>
                 <td>
-                    <a href="{{ route('showOrdersAdmin', ['id' => $item->id]) }}">Просмотр</a>
+                    <a href="{{ route('admin.orders.show', $item) }}">Просмотр</a>
                 </td>
             </tr>
         @endforeach

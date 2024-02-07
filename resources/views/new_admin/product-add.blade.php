@@ -1,7 +1,8 @@
-@extends('new_admin.admin')
+@extends('new_admin.layout.admin')
 @section('content')
     <h2>Добавление продукта на сайт</h2>
-    <form method="post" action="{{ route('createProduct') }}" enctype="multipart/form-data" class="d-flex flex-column">
+    <form method="post" action="{{ route('admin.products.store') }}" enctype="multipart/form-data"
+          class="d-flex flex-column">
         @csrf
         <input type="text" placeholder="Название товара" name="name"/>
         <input type="number" placeholder="Цена товара" name="price"/>
@@ -16,7 +17,7 @@
             </select>
         </label>
         <input multiple="multiple" name="image[]" type="file">
-{{--        // Добавить выбора категории товара--}}
+        {{--        // Добавить выбора категории товара--}}
         <input type="submit" placeholder="Создать"/>
     </form>
 @endsection

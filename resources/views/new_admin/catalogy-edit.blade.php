@@ -1,10 +1,8 @@
-@extends('new_admin.admin')
+@extends('new_admin.layout.admin')
 @section('content')
     <h2>Изменение каталога:</h2>
-    @foreach($categories as $item)
-        <p>Название категории: {{$item->name}}</p>
-    @endforeach
-    <form action="{{ route('updateCategories', [$categories[0]->id]) }}" method="post">
+    <p>{{$catalogs->categories_name}}</p>
+    <form action="{{ route('admin.category.update', $catalogs) }}" method="post">
         @csrf
         <input name="name" placeholder="Напишите новое название категории:" type="text"/>
         <input type="submit" placeholder="Сохранить"/>
