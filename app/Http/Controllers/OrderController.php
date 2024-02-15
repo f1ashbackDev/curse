@@ -19,7 +19,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function create(): string
+    public function create()
     {
         $user_basket = Basket::where('user_id', '=', Auth::id())->get();
         $order = Order::create([

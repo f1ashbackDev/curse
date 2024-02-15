@@ -7,6 +7,7 @@ use App\Http\Controllers\BasketController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,12 +21,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [UserController::class, 'indexPage'])->name('indexPage');
+Route::get('/', [UserController::class, 'indexPage'])->name('index');
 Route::post('/register',[UserController::class,'register'])->name('register');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::prefix('user')->group(function (){
+Route::middleware('auth:user')->prefix('user')->group(function (){
     // Корзина
     Route::get('/basket', [BasketController::class, 'show'])->name('basket');
     Route::get('/basket/{id}/store', [BasketController::class, 'store'])->name('basket.store');
@@ -37,7 +38,11 @@ Route::prefix('user')->group(function (){
     Route::get('order/{id}', [OrderItemController::class, 'store'])->name('order.item.store');
 });
 
-Route::prefix('admin')->group(function (){
+Route::get('/test', function (){
+    return view('new_admin.layout.admin');
+})->middleware('auth:admin');
+
+Route::middleware('IsAdminOrManager')->prefix('admin')->group(function (){
     Route::get('/', function (){
         return view('new_admin.layout.admin');
     });
@@ -60,7 +65,7 @@ Route::prefix('admin')->group(function (){
     Route::post('category/{category}/update', [CatalogsController::class, 'update'])->name('admin.category.update');
     Route::get('category/{category}/delete', [CatalogsController::class, 'destroy'])->name('admin.category.delete');
     // Заказы пользователей
-    Route::get('admin/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('admin.orders.index');
-    Route::get('admin/orders/{id}',[\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('admin.orders.show');
-    Route::post('admin/orders/update/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'update'])->name('admin.orders.update');
+    Route::get('orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('admin.orders.index');
+    Route::get('orders/{id}',[\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('admin.orders.show');
+    Route::post('orders/update/{order}', [\App\Http\Controllers\Admin\OrderController::class, 'update'])->name('admin.orders.update');
 });

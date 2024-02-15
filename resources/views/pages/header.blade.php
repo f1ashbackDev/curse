@@ -18,7 +18,7 @@
     <div class="" style="width: auto">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ route('indexPage') }}">
+                <a class="navbar-brand" href="{{ route('index') }}">
                     <img src="img/logotip.svg" alt="" srcset="" style="width: 40px; height: 35px;">
                     Автозапчасти
                 </a>
@@ -26,9 +26,10 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse nav justify-content-end" id="navbarNavAltMarkup">
+{{--                    переписать --}}
                     @if(\Illuminate\Support\Facades\Auth::user())
                     <div class="navbar-nav">
-                        <a class="nav-link" aria-current="page" href="{{ route('indexPage') }}">Главная</a>
+                        <a class="nav-link" aria-current="page" href="{{ route('index') }}">Главная</a>
                         <a class="nav-link" href="#">Каталог</a>
                         <a class="nav-link">{{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
                         <a class="nav-link" href="{{ route('basket') }}">
@@ -45,8 +46,8 @@
                     </div>
                     @else
                     <div class="navbar-nav">
-                        <a class="nav-link" aria-current="page" href="{{ route('indexPage') }}">Главная</a>
-                        <a class="nav-link" href="{{ route('indexPage') }}">Каталог</a>
+                        <a class="nav-link" aria-current="page" href="{{ route('index') }}">Главная</a>
+                        <a class="nav-link" href="{{ route('index') }}">Каталог</a>
                         <button type="button" class="nav-link" data-toggle="modal" data-target="#auth">
                             Войти
                         </button>

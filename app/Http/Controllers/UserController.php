@@ -51,7 +51,6 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $input = $request->all();
         $user = User::all()->where('login','=',$request->login)->first();
         if ($user && Hash::check($request->password, $user->password)){
             Auth::login($user);
@@ -63,10 +62,8 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect()->route('index');
     }
 }
