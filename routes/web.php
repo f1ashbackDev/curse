@@ -2,12 +2,13 @@
 
 use App\Http\Controllers\Admin\CatalogsController;
 use App\Http\Controllers\Admin\ProductsController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BasketController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Gate;
+use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,15 +22,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [UserController::class, 'indexPage'])->name('index');
-Route::post('/register',[UserController::class,'register'])->name('register');
+Route::get('/', [WebController::class, 'index'])->name('index');
+Route::get('/register', [WebController::class, 'register'])->name('registerView');
+Route::post('/register', [UserController::class, 'register'])->name('register');
+Route::get('/login', [WebController::class, 'login'])->name('loginView');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/product', [ProductController::class, 'index'])->name('product');
+Route::get('/product/{product}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/category/{category}', [CategoryController::class, 'index'])->name('category');
 
-Route::middleware('auth:user')->prefix('user')->group(function (){
+
+Route::middleware('auth')->prefix('user')->group(function (){
     // Корзина
     Route::get('/basket', [BasketController::class, 'show'])->name('basket');
-    Route::get('/basket/{id}/store', [BasketController::class, 'store'])->name('basket.store');
+    Route::post('/basket/{product}/store', [BasketController::class, 'store'])->name('basket.store');
     Route::post('/basket/{basket}/update', [BasketController::class, 'update'])->name('basket.update');
     Route::get('/basket/{basket}/delete', [BasketController::class, 'delete'])->name('basket.delete');
     // Заказы
@@ -38,18 +45,14 @@ Route::middleware('auth:user')->prefix('user')->group(function (){
     Route::get('order/{id}', [OrderItemController::class, 'store'])->name('order.item.store');
 });
 
-Route::get('/test', function (){
-    return view('new_admin.layout.admin');
-})->middleware('auth:admin');
-
 Route::middleware('IsAdminOrManager')->prefix('admin')->group(function (){
     Route::get('/', function (){
         return view('new_admin.layout.admin');
     });
     // Пользователи
     Route::get('users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.users.index');
-    Route::get('user/{user}/edit', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.users.edit');
-    Route::post('user/{user}/update', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.users.update');
+    Route::get('users/{user}/edit', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.users.edit');
+    Route::post('users/{user}/update', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.users.update');
     // Продукты
     Route::get('products/', [ProductsController::class, 'index'])->name('admin.products.index');
     Route::get('products/create', [ProductsController::class, 'create'])->name('admin.products.create');

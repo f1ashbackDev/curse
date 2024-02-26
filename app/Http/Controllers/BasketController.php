@@ -14,20 +14,27 @@ class BasketController extends Controller
     public function show()
     {
         $basket = Basket::with('product', 'productImage')->where('user_id', '=', Auth::id())->get();
-        return view('basket', [
+        return view('user.basket', [
             'basket' => $basket
         ]);
     }
 
-    public function store($id)
+    public function store(Request $request, Products $product)
     {
-        $product = Products::where('id', '=', $id)->first();
-        $basket = Basket::create([
-            'user_id' => Auth::id(),
-            'product_id' => $id,
-            'product_sum' => $product->price
-        ]);
-        return route('indexPage');
+        $basket = Basket::where('product_id', '=', $product->id)->first();
+        if($basket != null){
+            $basket->count += $request->count;
+            $basket->save();
+        }
+        else{
+            Basket::create([
+                'user_id' => Auth::id(),
+                'product_id' => $product->id,
+                'product_sum' => $product->price,
+                'count' => $request->count
+            ]);
+        }
+        return redirect()->route('index');
     }
 
     public function update(Request $request, Basket $basket)

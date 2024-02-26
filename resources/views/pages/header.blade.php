@@ -193,6 +193,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    "<p>{{ $errors->register}}</p>"
                     <form action="{{ route('register') }}" method="post" class="d-flex flex-column align-items-center">
                         @csrf
                         <label class="d-flex flex-column border-bottom mt-2">

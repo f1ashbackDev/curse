@@ -12,14 +12,19 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('products-all', [
+            'products' => Products::with('image')->paginate(6)
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Products $products)
+    public function show(Products $product)
     {
-        //
+        return view('product', [
+            'product' => $product,
+            'image' => $product->image
+        ]);
     }
 }

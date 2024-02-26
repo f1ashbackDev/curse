@@ -18,20 +18,22 @@ class CatalogsController extends Controller
 
     public function create()
     {
-        return view('new_admin.createCatalog');
+        return view('new_admin.catalog-create');
     }
 
     public function store(Request $request)
     {
-        $category = new Catalogs();
-        $category->categories_name = $request->name;
-        $category->save();
-        return redirect('/admin/categories');
+        $path = $request->file('image')->store('category', 'public');
+        Catalogs::create([
+            'categories_name' => $request->name,
+            'image' => $path
+        ]);
+        return redirect()->route('admin.category.index');
     }
 
     public function edit(Catalogs $catalogs)
     {
-        return view('new_admin.editCatalogy',[
+        return view('new_admin.catalogy-edit',[
             'categories' => $catalogs
         ]);
     }

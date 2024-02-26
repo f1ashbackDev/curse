@@ -14,7 +14,7 @@ class OrderController extends Controller
     public function index()
     {
         $order = Order::where('user_id', '=', Auth::id())->get();
-        return view('order', [
+        return view('user.order', [
             'order' => $order
         ]);
     }
