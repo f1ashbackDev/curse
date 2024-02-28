@@ -60,7 +60,7 @@
             const resultSum = document.getElementById(`result-${id}`)
             count.textContent++;
             resultSum.textContent = productSum.textContent * count.textContent
-            fetch(`basket/update/${id}`,{
+            fetch(`basket/${id}/update`,{
                 method: 'post',
                 body: JSON.stringify({
                     count: count.textContent

@@ -1,24 +1,66 @@
 @extends('pages.header')
 @section('content')
-    <div class="container " style="margin-top: 30px">
-        <h2 style="margin-bottom: 30px" >Товары категории: {{ $category_name }}</h2>
-        <div class="d-grid" style="grid-template-columns: repeat(3, 300px); grid-column-gap: 24px; grid-row-gap: 24px; grid-gap: 16px; justify-content: center">
-            @foreach($products as $item)
-                <div style="min-height: 416px; width: 282px; position: relative; border: 1px solid #808080; border-radius: 10px">
-                    <a href="{{ route('product.show', $item->id) }}" style="text-decoration: none; color: black">
-                        @foreach($item->image as $image)
-                            <img src="{{ asset('/storage/' . $image->image) }}" style=" width: 220px; height: 220px; max-width: 220px; min-height: 220px; object-fit: fill; margin-left: 30px;" alt="Товар"/>
-                            @break
-                        @endforeach
-                        <div style="padding: 16px;">
-                            <h4>{{ $item->name }}</h4>
-                            <p style="color: #797c83">{{ $item->category->categories_name }}</p>
+    <section>
+        <div class="container" style="margin-bottom: 50px; margin-top: 50px;">
+            <h3>{{ $category_name }}</h3>
+            @if(count($products))
+                <div style="display: grid;
+                        grid-template-columns: 0fr 0fr 0fr;
+                        justify-content: center;">
+                    @foreach($products as $product_item)
+                        <div style="width: 297.5px; margin-right: 20px; margin-bottom: 20px;">
+                            <div class="product_card" style="
+                                    padding: 20px;
+                                    position:relative;
+                                    height: 100%;
+                                    width: 100%;
+                                    background-color: #fff;
+                                    border-radius: 5px;
+                                    transition: box-shadow .3s,-webkit-box-shadow .3s;
+                                    text-align: start;">
+                                <div style="margin-bottom: 10px;">
+                                    <a href="{{ route('product.show', $product_item) }}">
+                                        @foreach($product_item->image as $image)
+                                            <img src="{{ asset('/storage/'. $image->image)}}" style="display: block; max-width: 100%; height: auto">
+                                            @break
+                                        @endforeach
+
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="text-decoration-none" href="{{ route('product.show', $product_item) }}"><h4 style="color: black">{{$product_item->name}}</h4></a>
+                                    @if($product_item->count > 0)
+                                        <p style="color: #5fa800">В наличии</p>
+                                        <p style="padding: 10px 0">{{$product_item->price}}</p>
+                                        <div style="
+                                        display: flex;
+                                        flex-wrap: wrap;
+                                        gap: 10px">
+                                            <div style="
+                                            display: flex;
+                                            position: relative;
+                                            text-align: center;
+                                            background: rgba(25, 118, 210, .1);
+                                            border-radius: 5px;
+                                            flex: 1">
+                                                <button class="product_card_buttons">-</button>
+                                                <input placeholder="1" class="product_card_ammount">
+                                                <button class="product_card_buttons">+</button>
+                                            </div>
+                                            <a class="addCard">
+                                                В корзину
+                                            </a>
+                                        </div>
+                                    @else
+                                        <p style="color: #e34545">Нет в наличии</p>
+                                        <p style="padding: 10px 0">{{$product_item->price}}</p>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
-                        <p style="position: absolute; bottom: 20px; left: 11px">{{ $item->price }}</p>
-                    </a>
-                    <a style="position: absolute; bottom: 35px; right: 11px">В корзину</a>
+                    @endforeach
                 </div>
-            @endforeach
+            @endif
         </div>
-    </div>
+    </section>
 @endsection

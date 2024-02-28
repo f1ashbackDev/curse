@@ -30,7 +30,8 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::get('/product/{product}', [ProductController::class, 'show'])->name('product.show');
-Route::get('/category/{category}', [CategoryController::class, 'index'])->name('category');
+Route::get('/category', [CategoryController::class, 'index'])->name('category');
+Route::get('/category/{category}', [CategoryController::class, 'show'])->name('category.show');
 
 
 Route::middleware('auth')->prefix('user')->group(function (){

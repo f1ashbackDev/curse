@@ -16,11 +16,12 @@ class IsAdminOrManager
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user() != null){
-            if(Auth::user()->role == 'Администратор' or Auth::user()->role == 'Менеджер'){
-                return $next($request);
-            }
-        }
-        return redirect()->route('index');
+        return $next($request);
+//        if(Auth::user() != null){
+//            if(Auth::user()->role == 'Администратор' or Auth::user()->role == 'Менеджер'){
+//                return $next($request);
+//            }
+//        }
+//        return redirect()->route('index');
     }
 }
