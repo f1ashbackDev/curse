@@ -19,7 +19,7 @@ class OrderController extends Controller
     public function show($id)
     {
         $orders = Order::find($id);
-        $ordersItem = OrderItems::where('order_id', '=', $orders->id)->with('product', 'image')->get();
+        $ordersItem = OrderItems::where('order_id', '=', $orders->id)->with('products', 'image')->get();
         return view('new_admin.showOrder',[
             'orders' => $orders,
             'orderItem' => $ordersItem

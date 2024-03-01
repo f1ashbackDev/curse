@@ -18,7 +18,7 @@
                                     transition: box-shadow .3s,-webkit-box-shadow .3s;
                                     text-align: start;">
                                 <div style="margin-bottom: 10px;">
-                                    <a href="{{ route('product.show', $product_item) }}">
+                                    <a href="{{ route('products.show', $product_item) }}">
                                         @foreach($product_item->image as $image)
                                             <img src="{{ asset('/storage/'. $image->image)}}" style="display: block; max-width: 100%; height: auto">
                                             @break
@@ -27,7 +27,7 @@
                                     </a>
                                 </div>
                                 <div>
-                                    <a class="text-decoration-none" href="{{ route('product.show', $product_item) }}"><h4 style="color: black">{{$product_item->name}}</h4></a>
+                                    <a class="text-decoration-none" href="{{ route('products.show', $product_item) }}"><h4 style="color: black">{{$product_item->name}}</h4></a>
                                     @if($product_item->count > 0)
                                         <p style="color: #5fa800">В наличии</p>
                                         <p style="padding: 10px 0">{{$product_item->price}}</p>

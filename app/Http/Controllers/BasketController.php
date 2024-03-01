@@ -13,7 +13,7 @@ class BasketController extends Controller
 
     public function show()
     {
-        $basket = Basket::with('product', 'productImage')->where('user_id', '=', Auth::id())->get();
+        $basket = Basket::with('products', 'productImage')->where('user_id', '=', Auth::id())->get();
         return view('user.basket', [
             'basket' => $basket
         ]);

@@ -28,8 +28,8 @@ Route::post('/register', [UserController::class, 'register'])->name('register');
 Route::get('/login', [WebController::class, 'login'])->name('loginView');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-Route::get('/product', [ProductController::class, 'index'])->name('product');
-Route::get('/product/{product}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/products/{products}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/category', [CategoryController::class, 'index'])->name('category');
 Route::get('/category/{category}', [CategoryController::class, 'show'])->name('category.show');
 
@@ -37,7 +37,7 @@ Route::get('/category/{category}', [CategoryController::class, 'show'])->name('c
 Route::middleware('auth')->prefix('user')->group(function (){
     // Корзина
     Route::get('/basket', [BasketController::class, 'show'])->name('basket');
-    Route::post('/basket/{product}/store', [BasketController::class, 'store'])->name('basket.store');
+    Route::post('/basket/{products}/store', [BasketController::class, 'store'])->name('basket.store');
     Route::post('/basket/{basket}/update', [BasketController::class, 'update'])->name('basket.update');
     Route::get('/basket/{basket}/delete', [BasketController::class, 'delete'])->name('basket.delete');
     // Заказы

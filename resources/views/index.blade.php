@@ -103,12 +103,12 @@
                                     transition: box-shadow .3s,-webkit-box-shadow .3s;
                                     text-align: start">
                                 <div style="margin-bottom: 10px;">
-                                    <a href="{{ route('product.show', $product_item) }}">
+                                    <a href="{{ route('products.show', $product_item) }}">
                                         <img src="{{ asset('/storage/'. $product_item->image[0]->image)}}" style="display: block; max-width: 100%; height: auto">
                                     </a>
                                 </div>
                                 <div>
-                                    <a class="text-decoration-none" href="{{ route('product.show', $product_item) }}"><h4 style="color: black">{{$product_item->name}}</h4></a>
+                                    <a class="text-decoration-none" href="{{ route('products.show', $product_item) }}"><h4 style="color: black">{{$product_item->name}}</h4></a>
                                     @if($product_item->count > 0)
                                         <p style="color: #5fa800">В наличии</p>
                                         <p style="padding: 10px 0">{{$product_item->price}}</p>
@@ -141,7 +141,7 @@
                     @endforeach
                 </div>
                 <div style="margin-bottom: 50px;">
-                    <a href="{{ route('product') }}" style="text-decoration: none; padding: 8px 10px; display: block; border-radius: 5px; color: #333; margin: 10px auto 0; width: max-content">Все товары</a>
+                    <a href="{{ route('products') }}" style="text-decoration: none; padding: 8px 10px; display: block; border-radius: 5px; color: #333; margin: 10px auto 0; width: max-content">Все товары</a>
                 </div>
             @else
                 <p>Товаров нет</p>

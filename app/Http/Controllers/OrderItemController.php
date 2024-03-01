@@ -10,7 +10,7 @@ class OrderItemController extends Controller
 {
     public function store($id)
     {
-        $orderHistory = OrderItems::where('order_id', '=', $id)->with('product', 'image')->get();
+        $orderHistory = OrderItems::where('order_id', '=', $id)->with('products', 'image')->get();
         // хз пока
         $order = Order::find($id)->first();
         return view('historyOrder', [

@@ -70,7 +70,7 @@
                 </div>
             </div>
         @else
-            <p>Корзина пустая. <a href="{{ route('product') }}">Перейти к покупкам.</a></p>
+            <p>Корзина пустая. <a href="{{ route('products') }}">Перейти к покупкам.</a></p>
         @endif
     </div>
 @endsection
@@ -125,7 +125,7 @@
         }
         // const add = (id) => {
         //     const count = document.getElementById(id);
-        //     const productSum = document.getElementById(`product-${id}`)
+        //     const productSum = document.getElementById(`products-${id}`)
         //     const resultSum = document.getElementById(`result-${id}`)
         //     count.textContent++;
         //     resultSum.textContent = productSum.textContent * count.textContent
@@ -148,7 +148,7 @@
         // }
         // const remove = (id) => {
         //     const count = document.getElementById(id);
-        //     const productSum = document.getElementById(`product-${id}`)
+        //     const productSum = document.getElementById(`products-${id}`)
         //     const resultSum = document.getElementById(`result-${id}`)
         //     if(count.textContent > 1){
         //         count.textContent--;
