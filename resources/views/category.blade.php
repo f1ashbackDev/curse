@@ -23,12 +23,12 @@
                                 border-radius: 5px;
                                 transition: box-shadow .3s,-webkit-box-shadow .3s">
                                 <div>
-                                    <a href="{{ route('category', [$category_item]) }}" style="text-decoration: none; color: #333333">
+                                    <a href="{{ route('category.show', $category_item) }}" style="text-decoration: none; color: #333333">
                                         <img src="{{ asset('/storage/'. $category_item->image) }}" style="display: block; max-width: 100%; height: auto">
                                     </a>
                                 </div>
                                 <div style="padding-top: 15px">
-                                    <a href="{{ route('category', [$category_item]) }}" style="text-decoration: none; color: #333333">{{$category_item->categories_name}}</a>
+                                    <a href="{{ route('category.show', $category_item) }}" style="text-decoration: none; color: #333333">{{$category_item->categories_name}}</a>
                                 </div>
                             </div>
                         </div>

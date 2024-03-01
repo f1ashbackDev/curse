@@ -83,7 +83,7 @@
             const count = listCount.get(id)
             if ( typeof count != "undefined" )
             {
-                return fetch(`basket/${id}/store`,{
+                return fetch(`user/basket/${id}/store`,{
                     method: 'post',
                     body: JSON.stringify({
                         count: count

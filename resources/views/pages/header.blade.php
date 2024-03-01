@@ -20,15 +20,20 @@
             <div class="container d-flex" style="flex-wrap: wrap; justify-content: space-between; align-items: center">
                 <p style="margin: 0">Бесплатная доставка при заказе от 5000 рублей</p>
                 <div class="d-flex" style="gap: 15px">
-                    <a href="{{ route('login') }}" class="nav-link">Войти</a>
-                    <a href="{{ route('register') }}" class="nav-link">Регистрация</a>
+                    @if(\Illuminate\Support\Facades\Auth::user())
+                        <a>Профиль</a>
+                    @else
+                        <a href="{{ route('login') }}" class="nav-link">Войти</a>
+                        <a href="{{ route('register') }}" class="nav-link">Регистрация</a>
+                    @endif
+
                 </div>
             </div>
         </div>
         <div class="container d-flex" style="flex-direction: row; align-items: center;
         justify-content: space-between; padding: 23px 0; gap: 15px">
             <div>
-                <a style="font-size: 20px; text-transform: uppercase; color: #fff; background-color: rgba(25, 118, 210, 1);
+                <a href="{{ route('index') }}" style="font-size: 20px; text-transform: uppercase; color: #fff; background-color: rgba(25, 118, 210, 1);
                 padding: 10px 10px; border-radius: 5px">Автозапчасти</a>
             </div>
             <div style="flex: 1;">
@@ -59,7 +64,7 @@
                 <a style="text-align: center; color: rgba(25, 118, 210); font-size: 85%">Напишите нам!</a>
             </div>
             <div>
-                <a style="font-size: 14px; color: #333">Корзина</a>
+                <a href="{{ route('basket') }}" style="font-size: 14px; color: #333">Корзина</a>
             </div>
         </div>
     </header>
@@ -71,7 +76,7 @@
                        display: flex;
                        flex-wrap: wrap">
                 <li style="flex: 1 1 auto; text-align: center; position: relative">
-                    <a style="color: #fff; font-size: 14px">
+                    <a href="{{ route('category') }}" style="color: #fff; font-size: 14px">
                         Каталог
                     </a>
                 </li>
@@ -137,7 +142,7 @@
                     <div style="">
                         <ul style="display: flex; gap: 20px; flex-wrap: wrap">
                             <li>
-                                <a style="color: #fff; font-size: 14px">
+                                <a href="{{ route('category') }}" style="color: #fff; font-size: 14px">
                                     Каталог
                                 </a>
                             </li>

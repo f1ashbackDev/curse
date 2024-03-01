@@ -8,30 +8,19 @@
         </a>
         <div style="padding: 30px 50px; margin: 0; text-align: center;">
             <h2 style="color: #2c2c2c; font-size: 30px">Единный личный кабинет БК название</h2>
-            <h3 style="font-size: 18px;color: #969696">Регистрация</h3>
+            <h3 style="font-size: 18px;color: #969696">Авторизация</h3>
         </div>
         <div style="padding: 12px 50px; margin: 0">
-            <form action="{{ route('register') }}" method="post" class="d-flex flex-column">
+            <form action="{{ route('login') }}" method="post" class="d-flex flex-column">
                 @csrf
-                <label for="surname" style="color: #989898; margin-bottom: 8px; font-weight: 400; line-height: normal; display: inline-block">Фамилия</label>
-                <input type="text" name="surname" id="surname" style="background-color: #f7f7f7; margin-bottom: 24px; padding: 0 12px; height: 40px"/>
-
-                <label for="name" style="color: #989898; margin-bottom: 8px; font-weight: 400; line-height: normal; display: inline-block">Имя</label>
-                <input type="text" name="name" id="name" style="background-color: #f7f7f7; margin-bottom: 24px; padding: 0 12px; height: 40px"/>
 
                 <label for="login" style="color: #989898; margin-bottom: 8px; font-weight: 400; line-height: normal; display: inline-block">Логин</label>
                 <input type="text" name="login" id="login" style="background-color: #f7f7f7; margin-bottom: 24px; padding: 0 12px; height: 40px"/>
 
-                <label for="email" style="color: #989898; margin-bottom: 8px; font-weight: 400; line-height: normal; display: inline-block">Почта</label>
-                <input type="email" name="email" id="email" style="background-color: #f7f7f7; margin-bottom: 24px; padding: 0 12px; height: 40px"/>
-
                 <label for="password" style="color: #989898; margin-bottom: 8px; font-weight: 400; line-height: normal; display: inline-block">Пароль</label>
                 <input type="password" name="password" id="password" style="background-color: #f7f7f7; margin-bottom: 24px; padding: 0 12px; height: 40px"/>
 
-                <label for="retryPassword" style="color: #989898; margin-bottom: 8px; font-weight: 400; line-height: normal; display: inline-block">Повторите пароль</label>
-                <input type="password" name="password_confirmation" id="retryPassword" style="background-color: #f7f7f7; margin-bottom: 24px; padding: 0 12px; height: 40px"/>
-
-                <input type="submit" style="margin-top: 24px; background-color: #0a58ca; color: #fff; padding: 12px 0" placeholder="Зарегистрироваться"/>
+                <a style="text-align: right; color: #32323f">Забыли пароль?</a>
 
                 @if(count($errors) > 0)
                     <div class="errors" style="margin-top: 20px">
@@ -42,11 +31,13 @@
                         </ul>
                     </div>
                 @endif
+
+                <button type="submit" style="margin-top: 24px; background-color: #0a58ca; color: #fff; padding: 12px 0">Войти</button>
             </form>
         </div>
         <div style="text-align: center; padding: 12px 50px; margin: 0">
-            <p>Уже зарегистрированы?
-                <a href="{{ route('loginView') }}" class="text-decoration-none" style="color: #0a53be">Войти</a>
+            <p>Нет аккаунта?
+                <a href = "{{ route('registerView') }}" class="text-decoration-none" style="color: #0a53be">Зарегистрироваться</a>
             </p>
         </div>
     </div>

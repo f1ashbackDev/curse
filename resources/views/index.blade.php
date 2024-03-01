@@ -68,12 +68,12 @@
                                 border-radius: 5px;
                                 transition: box-shadow .3s,-webkit-box-shadow .3s">
                             <div>
-                                <a href="{{ route('category', [$category_item]) }}">
+                                <a href="{{ route('category.show', [$category_item]) }}">
                                     <img src="{{ asset('/storage/'. $category_item->image) }}" style="display: block; max-width: 100%; height: auto">
                                 </a>
                             </div>
                             <div>
-                                <a href="{{ route('category', [$category_item]) }}">{{$category_item->categories_name}}</a>
+                                <a href="{{ route('category.show', [$category_item]) }}">{{$category_item->categories_name}}</a>
                             </div>
                         </div>
                     @endforeach
@@ -83,7 +83,7 @@
             </div>
         </div>
         <div>
-            <a style="padding: 8px 10px; display: block; border-radius: 5px; color: #333; margin: 2px auto 0; width: max-content">Все категории</a>
+            <a href="{{ route('category') }}" style="padding: 8px 10px; display: block; border-radius: 5px; color: #333; margin: 2px auto 0; width: max-content">Все категории</a>
         </div>
     </section>
     <section>
