@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Catalogs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CatalogsController extends Controller
 {
@@ -38,9 +39,14 @@ class CatalogsController extends Controller
         ]);
     }
 
-    public function update(Request $request, Catalogs $catalogs)
+    public function update(Request $request, Catalogs $category)
     {
-        $catalogs->update($request->all());
+        Storage::disk('public')->delete($category->image);
+        $path = $request->file('image')->store('category', 'public');
+        $category->update([
+            'categories_name' => $request->name,
+            'image' => $path
+        ]);
         return redirect()->route('admin.category.index');
     }
 

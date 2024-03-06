@@ -7,7 +7,7 @@
         </button>
     </div>
 
-    <table class="table table-bordered">
+    <table class="table">
         <tr>
             <th>Номер каталога</th>
             <th>Название каталога</th>
@@ -42,7 +42,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ route('admin.products.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.category.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Название каталога</label>
