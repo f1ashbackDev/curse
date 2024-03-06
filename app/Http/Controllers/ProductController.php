@@ -20,11 +20,11 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Products $product)
+    public function show(Products $products)
     {
-        return view('products', [
-            'products' => $product,
-            'image' => $product->image
+        return view('product', [
+            'product' => $products,
+            'image' => $products->image
         ]);
     }
 }

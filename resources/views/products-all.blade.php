@@ -15,7 +15,7 @@
                                     width: 100%;
                                     background-color: #fff;
                                     border-radius: 5px;
-                                    transition: box-shadow .3s,-webkit-box-shadow .3s;
+                                    box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
                                     text-align: start;">
                                 <div style="margin-bottom: 10px;">
                                     <a href="{{ route('products.show', $product_item) }}">
@@ -35,20 +35,24 @@
                                         display: flex;
                                         flex-wrap: wrap;
                                         gap: 10px">
-                                            <div style="
+                                            @if(\Illuminate\Support\Facades\Auth::user())
+                                                <div style="
                                             display: flex;
                                             position: relative;
                                             text-align: center;
                                             background: rgba(25, 118, 210, .1);
                                             border-radius: 5px;
                                             flex: 1">
-                                                <button class="product_card_buttons" onclick="del({{$product_item->id}})">-</button>
-                                                <input placeholder="1" class="product_card_ammount" id="{{$product_item->id}}">
-                                                <button class="product_card_buttons" onclick="add({{$product_item->id}})">+</button>
-                                            </div>
-                                            <a class="addCard" onclick="addCart({{$product_item->id}})">
-                                                В корзину
-                                            </a>
+                                                    <button class="product_card_buttons" onclick="del({{$product_item->id}})">-</button>
+                                                    <input placeholder="1" class="product_card_ammount" id="{{$product_item->id}}">
+                                                    <button class="product_card_buttons" onclick="add({{$product_item->id}})">+</button>
+                                                </div>
+                                                <a class="addCard" onclick="addCart({{$product_item->id}})">
+                                                    В корзину
+                                                </a>
+                                            @else
+                                                <p>Авторизуйтесь</p>
+                                            @endif
                                         </div>
                                     @else
                                         <p style="color: #e34545">Нет в наличии</p>
@@ -58,6 +62,11 @@
                             </div>
                         </div>
                     @endforeach
+                </div>
+                <div class="d-flex justify-content-center align-items-center mt-3">
+                    <ul class="pagination">
+                        {{$products->links()}}
+                    </ul>
                 </div>
             @endif
         </div>

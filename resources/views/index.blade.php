@@ -66,7 +66,7 @@
                                 width: 100%;
                                 background-color: #fff;
                                 border-radius: 5px;
-                                transition: box-shadow .3s,-webkit-box-shadow .3s">
+                                box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);">
                             <div>
                                 <a href="{{ route('category.show', [$category_item]) }}">
                                     <img src="{{ asset('/storage/'. $category_item->image) }}" style="display: block; max-width: 100%; height: auto">
@@ -100,7 +100,7 @@
                                     width: 100%;
                                     background-color: #fff;
                                     border-radius: 5px;
-                                    transition: box-shadow .3s,-webkit-box-shadow .3s;
+                                    box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
                                     text-align: start">
                                 <div style="margin-bottom: 10px;">
                                     <a href="{{ route('products.show', $product_item) }}">

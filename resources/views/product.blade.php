@@ -8,7 +8,7 @@
                              position:relative;
                              height: 100%;
                              width: 70%;
-                             background-color: #fff;
+                             box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
                              border-radius: 5px;
                              transition: box-shadow .3s,-webkit-box-shadow .3s;
                              text-align: start;
@@ -20,7 +20,7 @@
                                 <img src="{{  asset('/storage/' . $item->image)  }}" style="display: block;
                                                                                             max-width: 100%;
                                                                                             height: auto;
-                                                                                            margin-bottom: 20px">
+                                                                                            margin-bottom: 20px" id="imageSrc">
                                 @break
                             @endforeach
                         </div>
@@ -29,7 +29,7 @@
                                 <div style="width: 92.2px; margin-right: 10px">
                                     <img src="{{  asset('/storage/' . $item->image)  }}" style="display: block;
                                                                                             width: 62px;
-                                                                                            height: 62px">
+                                                                                            height: 62px" id="{{$item->id}}" onclick="test({{$item->id}})">
                                 </div>
                             @endforeach
                         </div>
@@ -47,7 +47,7 @@
                              width: 30%;
                              background-color: #fff;
                              border-radius: 5px;
-                             transition: box-shadow .3s,-webkit-box-shadow .3s;
+                             box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
                              text-align: start;
                              margin-left: 20px">
                     @if($product->count > 0)
@@ -56,29 +56,48 @@
                             <p style="padding: 10px 0;
                             font-size: 30px;
                             margin-bottom: 15px;">{{ $product->price }} рублей</p>
-                            <div style="
+                            @if(\Illuminate\Support\Facades\Auth::user())
+                                <div style="
                                         display: flex;
                                         flex-wrap: wrap;
                                         gap: 10px">
-                                <div style="
+                                    <div style="
                                             display: flex;
                                             position: relative;
                                             text-align: center;
                                             background: rgba(25, 118, 210, .1);
                                             border-radius: 5px;
                                             flex: 1">
-                                    <button class="product_card_buttons">-</button>
-                                    <input placeholder="1" class="product_card_ammount">
-                                    <button class="product_card_buttons">+</button>
+                                        <button class="product_card_buttons">-</button>
+                                        <input placeholder="1" class="product_card_ammount">
+                                        <button class="product_card_buttons">+</button>
+                                    </div>
+                                    <a class="addCard">
+                                        В корзину
+                                    </a>
                                 </div>
-                                <a class="addCard">
-                                    В корзину
-                                </a>
-                            </div>
+                            @else
+                                <div style="
+                                display: flex;
+                                flex-wrap: wrap;
+                                gap: 10px">
+                                    <p>Авторизуйтесь</p>
+                                </div>
+                            @endif
+
                         </div>
                     @endif
                 </div>
             </div>
         </div>
     </section>
+@endsection
+@section('js-scripts')
+    <script type="text/javascript">
+        const test = (image) => {
+            let clickedImage = document.getElementById(image);
+            let changeImage = document.getElementById('imageSrc');
+            changeImage.src = clickedImage.src;
+        }
+    </script>
 @endsection

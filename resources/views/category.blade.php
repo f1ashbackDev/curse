@@ -21,7 +21,7 @@
                                 width: 100%;
                                 background-color: #fff;
                                 border-radius: 5px;
-                                transition: box-shadow .3s,-webkit-box-shadow .3s">
+                                box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);">
                                 <div>
                                     <a href="{{ route('category.show', $category_item) }}" style="text-decoration: none; color: #333333">
                                         <img src="{{ asset('/storage/'. $category_item->image) }}" style="display: block; max-width: 100%; height: auto">

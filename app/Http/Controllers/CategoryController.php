@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catalogs;
+use App\Models\Products;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -17,7 +18,7 @@ class CategoryController extends Controller
     {
         return view('products-category', [
             'category_name' => $category->categories_name,
-            'products' => $category->product
+            'products' => $category->product()->paginate(3)
         ]);
     }
 }

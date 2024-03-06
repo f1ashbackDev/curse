@@ -21,6 +21,7 @@ a{
     flex-direction: column;
     justify-content: space-between;
     gap: 10px;
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
 }
 
 .product_card_buttons {

@@ -31,10 +31,10 @@ class CatalogsController extends Controller
         return redirect()->route('admin.category.index');
     }
 
-    public function edit(Catalogs $catalogs)
+    public function edit(Catalogs $category)
     {
         return view('new_admin.catalogy-edit',[
-            'categories' => $catalogs
+            'categories' => $category
         ]);
     }
 

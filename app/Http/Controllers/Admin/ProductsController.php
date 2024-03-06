@@ -13,14 +13,14 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        return view('new_admin.products',[
+        return view('new_admin.product',[
             'products' => Products::with('image', 'category')->get()
         ]);
     }
 
     public function create()
     {
-        return view('new_admin.products-add', [
+        return view('new_admin.product-add', [
            'categories' => Catalogs::all()
         ]);
     }
@@ -47,8 +47,8 @@ class ProductsController extends Controller
 
     public function edit(Products $products)
     {
-        return view('new_admin.products-edit', [
-           'products' => $products,
+        return view('new_admin.product-edit', [
+           'product' => $products,
            'image' => $products->image,
            'name_category' => $products->category->categories_name,
             'category' => Catalogs::all()

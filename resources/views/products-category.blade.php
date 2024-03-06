@@ -3,6 +3,7 @@
     <section>
         <div class="container" style="margin-bottom: 50px; margin-top: 50px;">
             <h3>{{ $category_name }}</h3>
+            <p>{{$products}}</p>
             @if(count($products))
                 <div style="display: grid;
                         grid-template-columns: 0fr 0fr 0fr;
@@ -16,7 +17,7 @@
                                     width: 100%;
                                     background-color: #fff;
                                     border-radius: 5px;
-                                    transition: box-shadow .3s,-webkit-box-shadow .3s;
+                                    box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
                                     text-align: start;">
                                 <div style="margin-bottom: 10px;">
                                     <a href="{{ route('products.show', $product_item) }}">
@@ -59,6 +60,11 @@
                             </div>
                         </div>
                     @endforeach
+                </div>
+                <div class="d-flex justify-content-center align-items-center mt-3">
+                    <ul class="pagination">
+                        {{$products->links()}}
+                    </ul>
                 </div>
             @endif
         </div>
