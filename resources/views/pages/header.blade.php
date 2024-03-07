@@ -22,6 +22,7 @@
                 <div class="d-flex" style="gap: 15px">
                     @if(\Illuminate\Support\Facades\Auth::user())
                         <a>Профиль</a>
+                        <a href="{{ route('order') }}">Заказы</a>
                     @else
                         <a href="{{ route('login') }}" class="nav-link">Войти</a>
                         <a href="{{ route('register') }}" class="nav-link">Регистрация</a>
