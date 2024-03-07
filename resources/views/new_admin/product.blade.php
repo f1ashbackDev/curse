@@ -55,7 +55,9 @@
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
+                                    <div class="alert alert-primary" role="alert">
+                                        {{ $error }}
+                                    </div>
                                 @endforeach
                             </ul>
                         </div>
@@ -79,8 +81,16 @@
                             <textarea class="form-control" id="description" rows="3" name="description"></textarea>
                         </div>
                         <div class="mb-3">
+                            <label for="description" class=form-label>Каталог</label>
+                            <select class="form-select" name="category" style="width: 350px; height: 40px;">
+                                @foreach($category as $item)
+                                    <option value="{{$item->id}}">{{$item->categories_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="photoFile" class="form-label">Фотографии товара</label>
-                            <input class="form-control" type="file" id="photoFile" name="image">
+                            <input class="form-control" type="file" name="image[]" id="photoFile" multiple>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Создать</button>

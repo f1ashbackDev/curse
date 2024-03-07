@@ -50,9 +50,9 @@ class CatalogsController extends Controller
         return redirect()->route('admin.category.index');
     }
 
-    public function destroy(Catalogs $catalogs)
+    public function destroy(Catalogs $category)
     {
-        $catalogs->delete();
+        $category->delete();
         return redirect()->route('admin.category.index');
     }
 }

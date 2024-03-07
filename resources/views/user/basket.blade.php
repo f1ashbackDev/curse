@@ -4,7 +4,7 @@
         <h2 style="margin-bottom: 30px; font-size: 36px">Корзина</h2>
         @if(count($basket))
             <div class="d-flex">
-                <div class = "basket">
+                <div class = "basket" style="box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);">
                     @foreach($basket as $item)
                         <div class="basket_card" style="">
                             <div style="width: 13%">
@@ -41,10 +41,12 @@
                         </div>
                     @endforeach
                 </div>
-                <div style="width: 26%; padding-left: 30px;
+                <div style="width: 26%;
                             margin-bottom: 30px;
                             font-size: 18px;
-                            border-radius: 2px;">
+                            border-radius: 2px;
+                            box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
+                            margin-left: 15px;">
                    <div style="padding: 15px 18px;
                    background-color: rgba(255,255,255, 1)">
                        <h4 style="border-bottom: 1px solid rgba(0,0,0, .05);
@@ -53,19 +55,7 @@
                        margin-left: -18px;
                        margin-right: -18px;
                        font-size: 20px">Ваш заказ</h4>
-                       <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: 10px">
-                           <p style="font-size: 18px">Товары:</p>
-                           <p style="font-size: 18px">500 р</p>
-                       </div>
-                       <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: 10px">
-                           <p style="font-size: 18px">Доставка:</p>
-                           <p style="font-size: 18px">0 р.</p>
-                       </div>
-                       <div style="border-top: 1px solid rgba(0,0,0, .05); padding-top: 15px; margin-top: 15px; margin-bottom: 15px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;">
-                           <p style="font-size: 23px">Итого:</p>
-                           <p style="font-size: 23px">500 р</p>
-                       </div>
-                       <a href="">Оформить</a>
+                       <a href="{{ route('order.store') }}">Оформить</a>
                    </div>
                 </div>
             </div>
@@ -123,53 +113,5 @@
                 )
             }
         }
-        // const add = (id) => {
-        //     const count = document.getElementById(id);
-        //     const productSum = document.getElementById(`products-${id}`)
-        //     const resultSum = document.getElementById(`result-${id}`)
-        //     count.textContent++;
-        //     resultSum.textContent = productSum.textContent * count.textContent
-        //     fetch(`basket/${id}/update`,{
-        //         method: 'post',
-        //         body: JSON.stringify({
-        //             count: count.textContent
-        //         }),
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             "X-CSRF-Token": csrf_token.content
-        //         }
-        //     }).then(
-        //         response => {
-        //             return console.log(response)
-        //         }
-        //     ).catch(
-        //         error => console.log(error)
-        //     )
-        // }
-        // const remove = (id) => {
-        //     const count = document.getElementById(id);
-        //     const productSum = document.getElementById(`products-${id}`)
-        //     const resultSum = document.getElementById(`result-${id}`)
-        //     if(count.textContent > 1){
-        //         count.textContent--;
-        //         resultSum.textContent = productSum.textContent / count.textContent
-        //     }
-        //     fetch(`basket/update/${id}`,{
-        //         method: 'post',
-        //         body: JSON.stringify({
-        //             count: count.textContent
-        //         }),
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             "X-CSRF-Token": csrf_token.content
-        //         }
-        //     }).then(
-        //         response => {
-        //             return console.log(response)
-        //         }
-        //     ).catch(
-        //         error => console.log(error)
-        //     )
-        // }
     </script>
 @endsection

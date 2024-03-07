@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserAuthRequest extends FormRequest
+class CategoryProduct extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,17 @@ class UserAuthRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
-            'surname'=>'required',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|min:6',
+            'categories_name' => 'required|unique:category',
+            'image' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Поле не должно быть пустым',
+            'name.unique' => 'Такой каталог уже существует',
+            'image.required' => 'Добавьте фотографии',
         ];
     }
 }

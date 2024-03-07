@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Catalogs;
 use App\Models\Image;
 use App\Models\Products;
@@ -14,7 +15,8 @@ class ProductsController extends Controller
     public function index()
     {
         return view('new_admin.product',[
-            'products' => Products::with('image', 'category')->get()
+            'products' => Products::with('image', 'category')->get(),
+            'category' => Catalogs::all()
         ]);
     }
 
@@ -34,11 +36,10 @@ class ProductsController extends Controller
             'description' => $request->description,
             'category_id' => $request->category
         ]);
-
-        foreach ($request->image as $photo){
-            $filename = $photo->store('products', 'public');
+        foreach ($request->file('image') as $item){
+            $path = $item->store('products', 'public');
             $image = new Image();
-            $image->image = $filename;
+            $image->image = $path;
             $image->products_id = $product->id;
             $image->save();
         }
@@ -55,9 +56,47 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function update(Request $request, Products $products)
+    public function update(ProductRequest $request, Products $products)
     {
-        $products->update($request->all());
+        if($request->name != null) {
+            $products->update([
+                'name' => $request->name
+            ]);
+        }
+        else if ($request->count != null){
+            $products->update([
+                'count' => $request->count
+            ]);
+        }
+        else if($request->price != null){
+            $products->update([
+                'price' => $request->price
+            ]);
+        }
+        else if($request->description != null){
+            $products->update([
+               'description' => $request->description
+            ]);
+        }
+        else if($request->category_id != null){
+            $products->update([
+                'category_id' => $request->category_id
+            ]);
+        }
+        else if($request->file('image') != null){
+            $image = Image::where(['products_id' => $products->id])->get();
+            foreach ($image as $item){
+                Storage::disk('public')->delete($item->image);
+                $item->delete();
+            }
+            foreach ($request->file('image') as $item){
+                $path = $item->store('products', 'public');
+                $image = new Image();
+                $image->image = $path;
+                $image->products_id = $products->id;
+                $image->save();
+            }
+        }
         return redirect()->route('admin.products.index');
     }
 

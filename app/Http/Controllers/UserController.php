@@ -2,42 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserAuthRequest;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\Catalogs;
 use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $rules = [
-            'name'=>'required',
-            'surname'=>'required',
-            'login' => 'required|unique:users',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|confirmed|min:6|max:32',
-        ];
-        $messages = [
-            'name.required' => 'Укажите имя',
-            'surname.required' => 'Укажите фамилию',
-            'login.required' => 'Укажите логин пользователя',
-            'login.unique' => 'Данный логин уже занят',
-            'email.required' => 'Укажите почту',
-            'email.unique' => 'Данная почта уже занята',
-            'password.required' => 'Укажите пароль',
-            'password.min' => 'Пароль не может быть меньше 6 символов',
-            'password.max' => 'Пароль не можеть быть больше 32 символов',
-            'password.confirmed' => 'Пароли не совпадают'
-        ];
-        $validator = Validator::make($request->all(), $rules, $messages);
-        if($validator->fails()){
-            return redirect('/register')->withErrors($validator)->withInput();
-        }
         $user = User::create([
             'surname' => $request->surname,
             'name' => $request->name,
@@ -50,7 +29,7 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $user = User::all()->where('login','=',$request->login)->first();
         if($user != null)
