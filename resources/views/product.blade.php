@@ -143,7 +143,28 @@
                     error => console.log(error)
                 )
             }
-            return listCount.set(id, 1)
+            else {
+                listCount.set(id, 1);
+                return fetch(`/user/basket/${id}/store`,{
+                    method: 'post',
+                    body: JSON.stringify({
+                        count: 1
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "X-CSRF-Token": csrf_token.content
+                    }
+                }).then(
+                    response => {
+                        notif.classList.remove('notifOff');
+                        setTimeout(()=>{
+                            notif.classList.add('notifOff');
+                        }, 1500)
+                    }
+                ).catch(
+                    error => console.log(error)
+                )
+            }
         }
     </script>
 @endsection
