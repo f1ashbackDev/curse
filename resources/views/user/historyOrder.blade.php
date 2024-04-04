@@ -4,7 +4,7 @@
         <div class="m-5">
             <h2>Заказ №{{ $order->id }}</h2>
             <p>Статус заказа:  {{ $order->status }}</p>
-            <p>Сумма по заказу: {{ $order->price }}</p>
+            <p id="totalAmount"></p>
             <table class="table">
                 <thead>
                 <tr>
@@ -32,9 +32,7 @@
                             <td>
                                 {{ $item->count }}
                             </td>
-                            <td>
-                                {{ $item->sum }}
-                            </td>
+                            <td class="product">{{ $item->sum }}</td>
                         </tr>
                     @endforeach
                 @endforeach
@@ -42,4 +40,19 @@
             </table>
         </div>
     </div>
+@endsection
+@section('js-scripts')
+    <script>
+        let total = 0;
+        let textTotal = document.getElementById('totalAmount');
+        const totalAmount = () =>{
+            [...document.getElementsByClassName('product')].forEach(item => {
+                total += parseInt(item.textContent)
+            })
+            textTotal.innerText = 'Общая сумма заказа: ' + total;
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            totalAmount();
+        })
+    </script>
 @endsection
