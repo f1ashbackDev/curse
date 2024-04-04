@@ -58,32 +58,32 @@ class ProductsController extends Controller
 
     public function update(ProductRequest $request, Products $products)
     {
-        if($request->name != null) {
+        if($request->has('name')) {
             $products->update([
                 'name' => $request->name
             ]);
         }
-        else if ($request->count != null){
+        if ($request->has('count')){
             $products->update([
                 'count' => $request->count
             ]);
         }
-        else if($request->price != null){
+        if($request->has('price')){
             $products->update([
                 'price' => $request->price
             ]);
         }
-        else if($request->description != null){
+        if($request->has('description')){
             $products->update([
                'description' => $request->description
             ]);
         }
-        else if($request->category_id != null){
+        if($request->has('category_id')){
             $products->update([
                 'category_id' => $request->category_id
             ]);
         }
-        else if($request->file('image') != null){
+        if($request->hasFile('image')){
             $image = Image::where(['products_id' => $products->id])->get();
             foreach ($image as $item){
                 Storage::disk('public')->delete($item->image);

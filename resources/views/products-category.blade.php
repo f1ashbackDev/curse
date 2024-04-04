@@ -37,20 +37,24 @@
                                         display: flex;
                                         flex-wrap: wrap;
                                         gap: 10px">
-                                            <div style="
+                                            @if(\Illuminate\Support\Facades\Auth::user())
+                                                <div style="
                                             display: flex;
                                             position: relative;
                                             text-align: center;
                                             background: rgba(25, 118, 210, .1);
                                             border-radius: 5px;
                                             flex: 1">
-                                                <button class="product_card_buttons">-</button>
-                                                <input placeholder="1" class="product_card_ammount">
-                                                <button class="product_card_buttons">+</button>
-                                            </div>
-                                            <a class="addCard">
-                                                В корзину
-                                            </a>
+                                                    <button class="product_card_buttons" onclick="del({{$product_item->id}})">-</button>
+                                                    <input placeholder="1" class="product_card_ammount" id="{{$product_item->id}}">
+                                                    <button class="product_card_buttons" onclick="add({{$product_item->id}})">+</button>
+                                                </div>
+                                                <a class="addCard" onclick="addCart({{$product_item->id}})">
+                                                    В корзину
+                                                </a>
+                                            @else
+                                                <p>Авторизуйтесь</p>
+                                            @endif
                                         </div>
                                     @else
                                         <p style="color: #e34545">Нет в наличии</p>
@@ -69,4 +73,45 @@
             @endif
         </div>
     </section>
+@endsection
+@section('js-scripts')
+    <script type="text/javascript">
+        let csrf_token = document.head.querySelector('meta[name="csrf-token"]');
+        let listCount = new Map();
+        const add = (id) => {
+            let input = document.getElementById(id);
+            input.placeholder++;
+            listCount.set(id, input.placeholder);
+            console.log(listCount);
+        }
+        const del = (id) => {
+            let input = document.getElementById(id);
+            input.placeholder--;
+            listCount.set(id, input.placeholder);
+            console.log(listCount);
+        }
+        const addCart = (id) =>{
+            const count = listCount.get(id)
+            if ( typeof count != "undefined" )
+            {
+                return fetch(`user/basket/${id}/store`,{
+                    method: 'post',
+                    body: JSON.stringify({
+                        count: count
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "X-CSRF-Token": csrf_token.content
+                    }
+                }).then(
+                    response => {
+                        return console.log(response)
+                    }
+                ).catch(
+                    error => console.log(error)
+                )
+            }
+            return listCount.set(id, 1)
+        }
+    </script>
 @endsection

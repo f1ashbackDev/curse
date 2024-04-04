@@ -43,7 +43,7 @@ Route::middleware('auth')->prefix('user')->group(function (){
     // Заказы
     Route::get('orders', [OrderController::class, 'index'])->name('order');
     Route::get('order/create', [OrderController::class, 'create'])->name('order.store');
-    Route::get('order/{id}', [OrderItemController::class, 'store'])->name('order.item.store');
+    Route::get('order/{order}', [OrderItemController::class, 'store'])->name('order.item.store');
 });
 
 Route::middleware('IsAdminOrManager')->prefix('admin')->group(function (){

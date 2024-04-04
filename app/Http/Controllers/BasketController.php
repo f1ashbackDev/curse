@@ -40,9 +40,10 @@ class BasketController extends Controller
 
     public function update(Request $request, Basket $basket)
     {
+        $product = Products::where('id', '=', $basket->product_id)->first();
         $basket->update([
             'count' => $request->count,
-            'product_sum' => $basket->product_sum * $request->count
+            'product_sum' => $product->price * $request->count
         ]);
         return response()->json($request);
     }

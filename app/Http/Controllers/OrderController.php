@@ -29,13 +29,16 @@ class OrderController extends Controller
         foreach ($user_basket as $item)
         {
             $product_count = Products::find($item->product_id);
+            if($product_count < 0){
+                break;
+            }
             $product_count->count = $product_count->count - $item->count;
             $product_count->save();
             OrderItems::create([
-               'order_id' => $order->id,
-               'product_id' => $item->product_id,
+                'order_id' => $order->id,
+                'product_id' => $item->product_id,
                 'count' => $item->count,
-                'sum' => $item->count * $item->product_sum
+                'sum' => $item->count * $product_count->price
             ]);
             $item->delete();
         }

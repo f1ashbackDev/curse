@@ -7,7 +7,6 @@
             </svg>
         </a>
         <div style="padding: 30px 50px; margin: 0; text-align: center;">
-            <h2 style="color: #2c2c2c; font-size: 30px">Единный личный кабинет БК название</h2>
             <h3 style="font-size: 18px;color: #969696">Авторизация</h3>
         </div>
         <div style="padding: 12px 50px; margin: 0">

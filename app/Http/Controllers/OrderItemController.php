@@ -8,14 +8,12 @@ use Illuminate\Http\Request;
 
 class OrderItemController extends Controller
 {
-    public function store($id)
+    public function store(Order $order)
     {
-        $orderHistory = OrderItems::where('order_id', '=', $id)->with('products', 'image')->get();
-        // хз пока
-        $order = Order::find($id)->first();
-        return view('historyOrder', [
-            'history' => $orderHistory,
-            'order' => $order
+        $orderHistory = OrderItems::where('order_id', '=', $order->id)->with('image', 'product')->get();
+        return view('user.historyOrder', [
+            'order' => $order,
+            'history' => $orderHistory
         ]);
     }
 }
