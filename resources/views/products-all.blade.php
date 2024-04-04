@@ -88,8 +88,11 @@
         }
         const del = (id) => {
             let input = document.getElementById(id);
-            input.value--;
-            listCount.set(id, input.value);
+            if(input.value > 1)
+            {
+                input.value--;
+                listCount.set(id, input.value);
+            }
             console.log(listCount);
         }
         const addCart = (id) =>{

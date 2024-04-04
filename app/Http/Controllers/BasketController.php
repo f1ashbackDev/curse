@@ -24,7 +24,7 @@ class BasketController extends Controller
         $basket = Basket::where('product_id', '=', $products->id)->first();
         if($basket != null){
             $basket->count += $request->count;
-            $basket->product_sum *= $request->count;
+            $basket->product_sum = $request->count * $products->price;
             $basket->save();
         }
         else{
