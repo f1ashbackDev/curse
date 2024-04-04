@@ -2,6 +2,9 @@
 @section('content')
     <section>
         <div class="container" style="margin-bottom: 50px; margin-top: 50px;">
+            <div class="alert alert-primary notifOff" role="alert" id="alert">
+                Товар добавлен в корзину
+            </div>
             @if(count($products))
                 <div style="display: grid;
                         grid-template-columns: 0fr 0fr 0fr;
@@ -44,7 +47,7 @@
                                             border-radius: 5px;
                                             flex: 1">
                                                     <button class="product_card_buttons" onclick="del({{$product_item->id}})">-</button>
-                                                    <input placeholder="1" class="product_card_ammount" id="{{$product_item->id}}">
+                                                    <input placeholder="1" class="product_card_ammount" id="{{$product_item->id}}" value="1">
                                                     <button class="product_card_buttons" onclick="add({{$product_item->id}})">+</button>
                                                 </div>
                                                 <a class="addCard" onclick="addCart({{$product_item->id}})">
@@ -75,24 +78,25 @@
 @section('js-scripts')
     <script type="text/javascript">
         let csrf_token = document.head.querySelector('meta[name="csrf-token"]');
+        let notif = document.getElementById('alert');
         let listCount = new Map();
         const add = (id) => {
             let input = document.getElementById(id);
-            input.placeholder++;
-            listCount.set(id, input.placeholder);
+            input.value++;
+            listCount.set(id, input.value);
             console.log(listCount);
         }
         const del = (id) => {
             let input = document.getElementById(id);
-            input.placeholder--;
-            listCount.set(id, input.placeholder);
+            input.value--;
+            listCount.set(id, input.value);
             console.log(listCount);
         }
         const addCart = (id) =>{
             const count = listCount.get(id)
             if ( typeof count != "undefined" )
             {
-                return fetch(`user/basket/${id}/store`,{
+                return fetch(`/user/basket/${id}/store`,{
                     method: 'post',
                     body: JSON.stringify({
                         count: count
@@ -103,7 +107,10 @@
                     }
                 }).then(
                     response => {
-                        return console.log(response)
+                        notif.classList.remove('notifOff');
+                        setTimeout(()=>{
+                            notif.classList.add('notifOff');
+                        }, 1500)
                     }
                 ).catch(
                     error => console.log(error)

@@ -29,7 +29,7 @@
                                             margin-bottom: 5px;">
                                         <button class="product_card_buttons" onclick="add({{$item->id}})">+</button>
                                         <input placeholder="{{ $item->count }}" class="product_card_ammount" id="{{$item->id}}" value="{{ $item->count }}">
-                                        <button class="product_card_buttons" onclick="del({{$item->id}})">-</button>
+                                        <button class="product_card_buttons" onclick="remove({{$item->id}})">-</button>
                                     </div>
                                     <p id="product-{{$item->id}}" style="font-weight: 400">{{ $product->price  }}</p>
                                 </div>
@@ -93,8 +93,9 @@
             const input = document.getElementById(id);
             const productSum = document.getElementById(`product-${id}`);
             const resultSum = document.getElementById(`result-${id}`);
-            if(input > 0){
-                input.value++;
+            console.log(id)
+            if(input.value > 0){
+                input.value--;
                 resultSum.textContent = productSum.textContent * input.value;
                 return fetch(`basket/${id}/update`,{
                     method: 'post',
