@@ -29,7 +29,7 @@ class OrderController extends Controller
         foreach ($user_basket as $item)
         {
             $product_count = Products::find($item->product_id);
-            if($product_count < 0){
+            if($product_count->count() < 0){
                 break;
             }
             $product_count->count = $product_count->count - $item->count;
