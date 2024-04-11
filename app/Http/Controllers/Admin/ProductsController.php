@@ -56,7 +56,7 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function update(ProductRequest $request, Products $products)
+    public function update(Request $request, Products $products)
     {
         if($request->has('name')) {
             $products->update([
