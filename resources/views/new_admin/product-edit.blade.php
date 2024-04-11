@@ -18,22 +18,22 @@
         <div class="input-group mb-3 d-flex flex-column col-sm-9">
             <label>Название продукта</label>
             <p>{{$product->name}}</p>
-            <input type="text" class="form-control" aria-label="" style="width: 350px; height: 30px;" name="name">
+            <input type="text" class="form-control" aria-label="" style="width: 350px; height: 30px;" name="name" value="{{$product->name}}">
         </div>
         <div class="input-group mb-3 d-flex flex-column col-sm-9">
             <label>Цена товара</label>
             <p>{{$product->price}}</p>
-            <input type="text" class="form-control" aria-label="" style="width: 350px; height: 30px;" name="price">
+            <input type="text" class="form-control" aria-label="" style="width: 350px; height: 30px;" name="price" value="{{$product->price}}">
         </div>
         <div class="input-group mb-3 d-flex flex-column col-sm-9">
             <label>Кол-во на складе</label>
             <p>{{$product->count}}</p>
-            <input type="text" class="form-control" aria-label="" style="width: 350px; height: 30px;" name="count">
+            <input type="text" class="form-control" aria-label="" style="width: 350px; height: 30px;" name="count" value="{{$product->count}}">
         </div>
         <div class="input-group mb-3 d-flex flex-column col-sm-9">
             <label>Описание продукта</label>
             <p>{{$product->description}}</p>
-            <input type="text" class="form-control" aria-label="" style="width: 350px; height: 30px;" name="description">
+            <input type="text" class="form-control" aria-label="" style="width: 350px; height: 30px;" name="description" value="{{$product->description}}">
         </div>
         <label>
             Категория товара: {{ $name_category }}
