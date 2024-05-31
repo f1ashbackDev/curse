@@ -1,4 +1,4 @@
-@extends('pages.header')
+@extends('layouts.header')
 @section('content')
     <div class="container" style="margin-bottom: 50px">
         <h2 style="margin-bottom: 30px; font-size: 36px">Корзина</h2>

@@ -1,4 +1,4 @@
-@extends('pages.header')
+@extends('layouts.header')
 @section('content')
     <div class="container">
         <div class="m-5">

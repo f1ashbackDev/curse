@@ -1,46 +1,39 @@
-@extends('pages.header')
+@extends('layouts.header')
 @section('content')
-    <section style="margin-bottom: 50px">
+    <section>
         <div class="container">
-            <div style="width: 1250px;">
-                <img src="{{ url(asset('img/test.jpg')) }}" style="display: block; max-width: 100%; height: auto; object-fit: fill">
+            <div class="banner">
+                <img src="{{ url(asset('img/test.jpg')) }}">
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;
-                            grid-gap: 20px; overflow-x: auto; white-space: nowrap">
-                <div style="padding: 20px; display: flex;
-                                align-items: center;
-                                gap: 20px">
-                    <div>
+            <div class="block-info">
+                <div class="block-flex_item">
+                    <div class="benefits_img">
                         <img src="{{ url(asset('img/smail/block1.svg')) }}">
                     </div>
-                    <div>
-                        <div style="font-weight: 600">
+                    <div class="benefits_text">
+                        <div>
                             100% Оригинальная продукция
                         </div>
                         от производителя
                     </div>
                 </div>
-                <div style="padding: 20px; display: flex;
-                                align-items: center;
-                                gap: 20px">
-                    <div>
+                <div class="block-flex_item">
+                    <div class="benefits_img">
                         <img src="{{ url(asset('img/smail/block2.svg')) }}">
                     </div>
-                    <div>
-                        <div style="font-weight: 600">
+                    <div class="benefits_text">
+                        <div>
                             Бесплатная доставка
                         </div>
                         по всему миру
                     </div>
                 </div>
-                <div style="padding: 20px; display: flex;
-                                align-items: center;
-                                gap: 20px">
-                    <div>
+                <div class="block-flex_item">
+                    <div class="benefits_img">
                         <img src="{{ url(asset('img/smail/block3.svg')) }}">
                     </div>
-                    <div>
-                        <div style="font-weight: 600">
+                    <div class="benefits_text">
+                        <div>
                             Скидки и подарки
                         </div>
                         нашим клиентам
@@ -49,7 +42,7 @@
             </div>
         </div>
     </section>
-    <section style="margin-bottom: 50px">
+    <section>
         <div class="container text-center">
             <h3>Категории</h3>
             <div style="
@@ -95,6 +88,7 @@
             @if(count($products))
                 <div style="display: flex; box-sizing: content-box;">
                     @foreach($products as $product_item)
+
                         <div style="width: 297.5px; margin-right: 20px;">
                             <div class="product_card" style="
                                     padding: 20px;
@@ -126,11 +120,11 @@
                                             background: rgba(25, 118, 210, .1);
                                             border-radius: 5px;
                                             flex: 1">
-                                                <button class="product_card_buttons" onclick="del({{$product_item->id}})">-</button>
-                                                <input placeholder="1" class="product_card_ammount" id="{{$product_item->id}}" value="1">
-                                                <button class="product_card_buttons" onclick="add({{$product_item->id}})">+</button>
+                                                <button class="product_card_buttons" onclick="downSizeProductInput({{$product_item->id}})">-</button>
+                                                <input placeholder="1" class="product_card_ammount" id="product-input-{{$product_item->id}}" value="1">
+                                                <button class="product_card_buttons" onclick="addProductInput({{$product_item->id}})">+</button>
                                             </div>
-                                            <a class="addCard" onclick="addCart({{$product_item->id}})">
+                                            <a class="addCard" onclick="sendServerAddProduct({{$product_item->id}})">
                                                 В корзину
                                             </a>
                                         </div>
@@ -151,51 +145,4 @@
             @endif
         </div>
     </section>
-@endsection
-@section('js-scripts')
-    <script type="text/javascript">
-        let csrf_token = document.head.querySelector('meta[name="csrf-token"]');
-        let notif = document.getElementById('alert');
-        let listCount = new Map();
-        const add = (id) => {
-            let input = document.getElementById(id);
-            input.value++;
-            listCount.set(id, input.value);
-            console.log(listCount);
-        }
-        const del = (id) => {
-            let input = document.getElementById(id);
-            if(input.value > 1){
-                input.value--;
-                listCount.set(id, input.value);
-                console.log(listCount);
-            }
-        }
-        const addCart = (id) =>{
-            const count = listCount.get(id)
-            if ( typeof count != "undefined" )
-            {
-                return fetch(`/user/basket/${id}/store`,{
-                    method: 'post',
-                    body: JSON.stringify({
-                        count: count
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        "X-CSRF-Token": csrf_token.content
-                    }
-                }).then(
-                    response => {
-                        notif.classList.remove('notifOff');
-                        setTimeout(()=>{
-                            notif.classList.add('notifOff');
-                        }, 1500)
-                    }
-                ).catch(
-                    error => console.log(error)
-                )
-            }
-            return listCount.set(id, 1)
-        }
-    </script>
 @endsection

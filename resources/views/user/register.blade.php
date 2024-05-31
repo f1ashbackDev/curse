@@ -1,4 +1,4 @@
-@extends('pages.header')
+@extends('layouts.header')
 @section('content')
     <div class= "bg-white" style="min-height: calc(100vh - 186px ); width: 470px; margin: 0 auto; margin-bottom: 30px">
         <a href="{{ route('index') }}" style="float: right; margin-right: 8px; margin-top: 12px">

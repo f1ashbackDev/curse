@@ -1,4 +1,4 @@
-@extends('pages.header')
+@extends('layouts.header')
 @section('content')
     <section style="margin-bottom: 50px;">
         <div class="container">

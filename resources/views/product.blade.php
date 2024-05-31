@@ -1,4 +1,4 @@
-@extends('pages.header')
+@extends('layouts.header')
 @section('content')
     <section style="margin-bottom: 50px;">
         <div class="container">
@@ -71,11 +71,11 @@
                                             background: rgba(25, 118, 210, .1);
                                             border-radius: 5px;
                                             flex: 1">
-                                        <button class="product_card_buttons" onclick="del({{$product->id}})">-</button>
-                                        <input placeholder="1" class="product_card_ammount" id="value_product-{{$product->id}}" value="1">
-                                        <button class="product_card_buttons" onclick="add({{$product->id}})">+</button>
+                                        <button class="product_card_buttons" onclick="downSizeProductInput({{$product->id}})">-</button>
+                                        <input placeholder="1" class="product_card_ammount" id="product-input-{{$product_item->id}}" value="1">
+                                        <button class="product_card_buttons" onclick="addProductInput({{$product->id}})">+</button>
                                     </div>
-                                    <a class="addCard" onclick="addCart({{$product->id}})">
+                                    <a class="addCard" onclick="sendServerAddProduct({{$product->id}})">
                                         В корзину
                                     </a>
                                 </div>
@@ -94,77 +94,4 @@
             </div>
         </div>
     </section>
-@endsection
-@section('js-scripts')
-    <script type="text/javascript">
-        const test = (image) => {
-            let clickedImage = document.getElementById(image);
-            let changeImage = document.getElementById('imageSrc');
-            changeImage.src = clickedImage.src;
-        }
-        let csrf_token = document.head.querySelector('meta[name="csrf-token"]');
-        let notif = document.getElementById('alert');
-        let listCount = new Map();
-        const add = (id) => {
-            let input = document.getElementById('value_product-' + id);
-            input.value++;
-            listCount.set(id, input.value);
-            console.log(listCount);
-        }
-        const del = (id) => {
-            let input = document.getElementById('value_product-' + id);
-            if(input.value > 1){
-                input.value--;
-                listCount.set(id, input.value);
-            }
-            console.log(listCount);
-        }
-        const addCart = (id) =>{
-            const count = listCount.get(id)
-            if ( typeof count != "undefined" )
-            {
-                return fetch(`/user/basket/${id}/store`,{
-                    method: 'post',
-                    body: JSON.stringify({
-                        count: count
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        "X-CSRF-Token": csrf_token.content
-                    }
-                }).then(
-                    response => {
-                        notif.classList.remove('notifOff');
-                        setTimeout(()=>{
-                            notif.classList.add('notifOff');
-                        }, 1500)
-                    }
-                ).catch(
-                    error => console.log(error)
-                )
-            }
-            else {
-                listCount.set(id, 1);
-                return fetch(`/user/basket/${id}/store`,{
-                    method: 'post',
-                    body: JSON.stringify({
-                        count: 1
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        "X-CSRF-Token": csrf_token.content
-                    }
-                }).then(
-                    response => {
-                        notif.classList.remove('notifOff');
-                        setTimeout(()=>{
-                            notif.classList.add('notifOff');
-                        }, 1500)
-                    }
-                ).catch(
-                    error => console.log(error)
-                )
-            }
-        }
-    </script>
 @endsection
