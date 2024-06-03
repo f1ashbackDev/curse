@@ -1,5 +1,6 @@
 const button = document.querySelector('#headerNavButton');
 const csrf_token = document.head.querySelector('meta[name="csrf-token"]');
+const notification = document.querySelector('#alert');
 let productCount = new Map();
 
 button.onclick = function(){
@@ -49,7 +50,7 @@ async function sendServerAddProduct(id){
             }
         })
         if(response.ok){
-            console.log('Продукт добавлен в корзину');
+            showNotification();
             return console.log(response.text());
         }else{
             console.log(response.status);
@@ -58,4 +59,11 @@ async function sendServerAddProduct(id){
     }catch (e) {
         console.log(e);
     }
+}
+
+const showNotification = () => {
+    notification.classList.remove('notifOff');
+    setTimeout(() => {
+        notification.classList.add('notifOff');
+    }, 1000);
 }

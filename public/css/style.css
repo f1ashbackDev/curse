@@ -178,7 +178,7 @@ section{
 /* catalogs */
 .catalogs {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
     text-align: center
 }
@@ -187,7 +187,7 @@ section{
     padding: 20px;
     position: relative;
     height: 100%;
-    width: 100%;
+    width: 297.5px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
@@ -201,8 +201,10 @@ section{
 
 /* products */
 .products{
-    display: flex;
-    box-sizing: content-box;
+    display: grid;
+    grid-template-columns: 0fr 0fr 0fr 0fr;
+    justify-content: center;
+    gap: 20px;
 }
 
 .product-row{
@@ -238,7 +240,8 @@ section{
 .product_footer{
     display: flex;
     flex-wrap: wrap;
-    gap: 10px
+    gap: 10px;
+    background-color: rgba(25, 118, 210, .1);
 }
 
 .product_footer div{
@@ -275,6 +278,80 @@ section{
     padding: 8px 10px;
     border-radius: 5px;
     text-decoration: none;
+}
+
+.product_row{
+    display:flex;
+}
+
+.product_row_1{
+    padding: 20px;
+    position:relative;
+    height: 100%;
+    width: 70%;
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
+    border-radius: 5px;
+    transition: box-shadow .3s,-webkit-box-shadow .3s;
+    text-align: start;
+    display: flex;
+    gap: 20px
+}
+
+.product_row_1 img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px
+}
+
+.product_images{
+    width: 92.2px;
+    margin-right: 10px
+}
+
+.product_images img {
+    display: block;
+    width: 62px;
+    height: 62px
+}
+
+.product_row_2{
+    padding: 20px;
+    position:relative;
+    height: 100%;
+    width: 30%;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
+    text-align: start;
+    margin-left: 20px
+}
+
+.product_inform_price{
+    padding: 10px 0;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.product_inform_add_product{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px
+}
+
+.product_inform_input{
+    display: flex;
+    position: relative;
+    text-align: center;
+    background: rgba(25, 118, 210, .1);
+    border-radius: 5px;
+    flex: 1
+}
+
+.product_auth_user{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px
 }
 
 /* footer */
@@ -447,19 +524,41 @@ footer{
     }
 
     .catalog{
-        width: 297.5px;
+        width: 250px;
     }
 
     .products{
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        grid-template-columns: 0fr;
     }
 
     .product-row{
         margin-right: 0;
         margin-bottom: 15px;
+        width: 250px;
     }
+/*    product in page*/
+    .product_row{
+        flex-direction: column;
+    }
+
+    .product_row_1{
+        width: 100%;
+    }
+
+    .product_row_2{
+        width: 100%;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+
+    .product_footer{
+        flex-wrap: nowrap;
+    }
+
+    .product_footer input.product_card_buttons{
+        width: 50%;
+    }
+
 /*    footer*/
     .footer-rows{
         display: block;

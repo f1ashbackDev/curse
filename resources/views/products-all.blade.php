@@ -1,26 +1,17 @@
 @extends('layouts.header')
 @section('content')
     <section>
-        <div class="container" style="margin-bottom: 50px; margin-top: 50px;">
+        <div class="container">
             <div class="alert alert-primary notifOff" role="alert" id="alert">
                 Товар добавлен в корзину
             </div>
+            <h3 class="mb-4">Все товары</h3>
             @if(count($products))
-                <div style="display: grid;
-                        grid-template-columns: 0fr 0fr 0fr;
-                        justify-content: center;">
+                <div class="products">
                     @foreach($products as $product_item)
-                        <div style="width: 297.5px; margin-right: 20px; margin-bottom: 20px;">
-                            <div class="product_card" style="
-                                    padding: 20px;
-                                    position:relative;
-                                    height: 100%;
-                                    width: 100%;
-                                    background-color: #fff;
-                                    border-radius: 5px;
-                                    box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
-                                    text-align: start;">
-                                <div style="margin-bottom: 10px;">
+                        <div class="product-row">
+                            <div class="product_card">
+                                <div class="product_img">
                                     <a href="{{ route('products.show', $product_item) }}">
                                         @foreach($product_item->image as $image)
                                             <img src="{{ asset('/storage/'. $image->image)}}" style="display: block; max-width: 100%; height: auto">
@@ -29,7 +20,7 @@
 
                                     </a>
                                 </div>
-                                <div>
+                                <div class="product_body">
                                     <a class="text-decoration-none" href="{{ route('products.show', $product_item) }}"><h4 style="color: black">{{$product_item->name}}</h4></a>
                                     @if($product_item->count > 0)
                                         <p style="color: #5fa800">В наличии</p>
@@ -39,13 +30,7 @@
                                         flex-wrap: wrap;
                                         gap: 10px">
                                             @if(\Illuminate\Support\Facades\Auth::user())
-                                                <div style="
-                                            display: flex;
-                                            position: relative;
-                                            text-align: center;
-                                            background: rgba(25, 118, 210, .1);
-                                            border-radius: 5px;
-                                            flex: 1">
+                                                <div class="product_footer">
                                                     <button class="product_card_buttons" onclick="downSizeProductInput({{$product_item->id}})">-</button>
                                                     <input placeholder="1" class="product_card_ammount" id="product-input-{{$product_item->id}}" value="1">
                                                     <button class="product_card_buttons" onclick="addProductInput({{$product_item->id}})">+</button>

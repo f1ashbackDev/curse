@@ -44,34 +44,25 @@
     </section>
     <section>
         <div class="container text-center">
-            <h3>Категории</h3>
-            <div style="
-                    display: grid;
-                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-                    grid-gap: 20px;
-                    text-align: center">
+            <h3 class="mb-4">Категории</h3>
+            <div class="catalogs">
                 @if(count($category))
                     @foreach($category as $category_item)
-                        <div style="
-                                padding: 20px;
-                                position: relative;
-                                height: 100%;
-                                width: 100%;
-                                background-color: #fff;
-                                border-radius: 5px;
-                                box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);">
-                            <div>
-                                <a href="{{ route('category.show', [$category_item]) }}">
-                                    <img src="{{ asset('/storage/'. $category_item->image) }}" style="display: block; max-width: 100%; height: auto">
-                                </a>
-                            </div>
-                            <div>
-                                <a href="{{ route('category.show', [$category_item]) }}">{{$category_item->categories_name}}</a>
+                        <div>
+                            <div class="catalog">
+                                <div>
+                                    <a href="{{ route('category.show', [$category_item]) }}">
+                                        <img src="{{ asset('/storage/'. $category_item->image) }}">
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="{{ route('category.show', [$category_item]) }}">{{$category_item->categories_name}}</a>
+                                </div>
                             </div>
                         </div>
                     @endforeach
                 @else
-                    <p>На данный момент категорий нет на сайте</p>
+                    <p class="text-center">На данный момент категорий нет на сайте</p>
                 @endif
             </div>
         </div>
@@ -86,40 +77,22 @@
                 Товар добавлен в корзину
             </div>
             @if(count($products))
-                <div style="display: flex; box-sizing: content-box;">
+                <div class="products">
                     @foreach($products as $product_item)
-
-                        <div style="width: 297.5px; margin-right: 20px;">
-                            <div class="product_card" style="
-                                    padding: 20px;
-                                    position:relative;
-                                    height: 100%;
-                                    width: 100%;
-                                    background-color: #fff;
-                                    border-radius: 5px;
-                                    box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
-                                    text-align: start">
-                                <div style="margin-bottom: 10px;">
+                        <div class="product-row">
+                            <div class="product_card">
+                                <div class="product_img">
                                     <a href="{{ route('products.show', $product_item) }}">
-                                        <img src="{{ asset('/storage/'. $product_item->image[0]->image)}}" style="display: block; max-width: 100%; height: auto">
+                                        <img src="{{ asset('/storage/'. $product_item->image[0]->image)}}" width="360px" height="360px">
                                     </a>
                                 </div>
-                                <div>
-                                    <a class="text-decoration-none" href="{{ route('products.show', $product_item) }}"><h4 style="color: black">{{$product_item->name}}</h4></a>
+                                <div class="product_body">
+                                    <a class="text-decoration-none" href="{{ route('products.show', $product_item) }}"><h4>{{$product_item->name}}</h4></a>
                                     @if($product_item->count > 0)
                                         <p style="color: #5fa800">В наличии</p>
                                         <p style="padding: 10px 0">{{$product_item->price}}</p>
-                                        <div style="
-                                        display: flex;
-                                        flex-wrap: wrap;
-                                        gap: 10px">
-                                            <div style="
-                                            display: flex;
-                                            position: relative;
-                                            text-align: center;
-                                            background: rgba(25, 118, 210, .1);
-                                            border-radius: 5px;
-                                            flex: 1">
+                                        <div class="product_footer">
+                                            <div>
                                                 <button class="product_card_buttons" onclick="downSizeProductInput({{$product_item->id}})">-</button>
                                                 <input placeholder="1" class="product_card_ammount" id="product-input-{{$product_item->id}}" value="1">
                                                 <button class="product_card_buttons" onclick="addProductInput({{$product_item->id}})">+</button>
