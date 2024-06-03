@@ -3,10 +3,10 @@
     <div class="container" style="margin-bottom: 50px">
         <h2 style="margin-bottom: 30px; font-size: 36px">Корзина</h2>
         @if(count($basket))
-            <div class="d-flex">
-                <div class = "basket" style="box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);">
+            <div class="basket-rows">
+                <div class = "basket">
                     @foreach($basket as $item)
-                        <div class="basket_card" style="">
+                        <div class="basket_card">
                             <div style="width: 13%">
                                 @foreach($item->productImage as $image)
                                     <img src="{{ asset('/storage/' . $image->image) }}" style="display: block; max-width: 100%; height: auto">
@@ -41,12 +41,7 @@
                         </div>
                     @endforeach
                 </div>
-                <div style="width: 26%;
-                            margin-bottom: 30px;
-                            font-size: 18px;
-                            border-radius: 2px;
-                            box-shadow: 0 10px 20px -5px rgba(0,0,0,.2);
-                            margin-left: 15px;">
+                <div class="basket_information">
                    <div style="padding: 15px 18px;
                    background-color: rgba(255,255,255, 1)">
                        <h4 style="border-bottom: 1px solid rgba(0,0,0, .05);
